@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container" style="padding: 0 4vh; margin-top: 10px;">
+            <div class="container" style="margin-top: 10px;">
                 <div class="search-box">
                     <form class='search-form'>
                         <button class='btn btn-link search-btn'>
@@ -72,10 +72,27 @@
                             <img src="<?php echo base_url() ?>img/pupuk-organik-5.jpg"/>
                         </div>
                         <div class="product-category-overview">
-                            <p>Pupuk Organik</p>
-                            <p style="font-weight: bold;
-                            font-size: 12px;">Rp.69.000,-</p>
-                            <button>Pesan Sekarang</button>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="font-size: 9px;
+                                    text-align: left;
+                                    padding-top: 8px;">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span></td>
+                                    <td style="text-align: right;"><span class="badge" style="font-size: 8px;background-color: #89BF43;">Kg</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 11px;
+                                    font-weight: 800; text-align: left;">Organik</td>
+                                    <td style="text-align: right;"><p style="font-weight: bold;
+                                        font-size: 8px;">Rp.69.000,-</p></td>
+                                </tr>
+
+                            </table>
+                            <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
                         </div>
                     </div>
                     <div class="category-product-wrapper">
@@ -83,10 +100,27 @@
                             <img src="<?php echo base_url() ?>img/pupuk-organik-5.jpg"/>
                         </div>
                         <div class="product-category-overview">
-                            <p>Pupuk Organik</p>
-                            <p style="font-weight: bold;
-                            font-size: 12px;">Rp.69.000,-</p>
-                            <button>Pesan Sekarang</button>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="font-size: 9px;
+                                    text-align: left;
+                                    padding-top: 8px;">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span></td>
+                                    <td style="text-align: right;"><span class="badge" style="font-size: 8px;background-color: #89BF43;">Kg</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 11px;
+                                    font-weight: 800;text-align: left;">SP-36</td>
+                                    <td style="text-align: right;"><p style="font-weight: bold;
+                                        font-size: 8px;">Rp.69.000,-</p></td>
+                                </tr>
+
+                            </table>
+                            <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
                         </div>
                     </div>
                     <div class="category-product-wrapper">
@@ -94,34 +128,30 @@
                             <img src="<?php echo base_url() ?>img/pupuk-organik-5.jpg"/>
                         </div>
                         <div class="product-category-overview">
-                            <p>Pupuk Organik</p>
-                            <p style="font-weight: bold;
-                            font-size: 12px;">Rp.69.000,-</p>
-                            <button>Pesan Sekarang</button>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="font-size: 9px;
+                                    text-align: left;
+                                    padding-top: 8px;">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span></td>
+                                    <td style="text-align: right;"><span class="badge" style="font-size: 8px;background-color: #89BF43;">Kg</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 11px;
+                                    font-weight: 800;text-align: left;">NPK Phonska</td>
+                                    <td style="text-align: right;"><p style="font-weight: bold;
+                                        font-size: 8px;">Rp.69.000,-</p></td>
+                                </tr>
+
+                            </table>
+                            <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
                         </div>
                     </div>
-                    <div class="category-product-wrapper">
-                        <div class="image-product-category">
-                            <img src="<?php echo base_url() ?>img/pupuk-organik-5.jpg"/>
-                        </div>
-                        <div class="product-category-overview">
-                            <p>Pupuk Organik</p>
-                            <p style="font-weight: bold;
-                            font-size: 12px;">Rp.69.000,-</p>
-                            <button>Pesan Sekarang</button>
-                        </div>
-                    </div>
-                    <div class="category-product-wrapper">
-                        <div class="image-product-category">
-                            <img src="<?php echo base_url() ?>img/pupuk-organik-5.jpg"/>
-                        </div>
-                        <div class="product-category-overview">
-                            <p>Pupuk Organik</p>
-                            <p style="font-weight: bold;
-                            font-size: 12px;">Rp.69.000,-</p>
-                            <button>Pesan Sekarang</button>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -135,10 +165,27 @@
                             <img src="<?php echo base_url() ?>img/pupuk-organik-5.jpg"/>
                         </div>
                         <div class="product-category-overview">
-                            <p>Pupuk Organik</p>
-                            <p style="font-weight: bold;
-                            font-size: 12px;">Rp.69.000,-</p>
-                            <button>Pesan Sekarang</button>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="font-size: 9px;
+                                    text-align: left;
+                                    padding-top: 8px;">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span></td>
+                                    <td style="text-align: right;"><span class="badge" style="font-size: 8px;background-color: #89BF43;">Kg</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 11px;
+                                    font-weight: 800; text-align: left;">Organik</td>
+                                    <td style="text-align: right;"><p style="font-weight: bold;
+                                        font-size: 8px;">Rp.69.000,-</p></td>
+                                </tr>
+
+                            </table>
+                            <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
                         </div>
                     </div>
                     <div class="category-product-wrapper">
@@ -146,10 +193,27 @@
                             <img src="<?php echo base_url() ?>img/pupuk-organik-5.jpg"/>
                         </div>
                         <div class="product-category-overview">
-                            <p>Pupuk Organik</p>
-                            <p style="font-weight: bold;
-                            font-size: 12px;">Rp.69.000,-</p>
-                            <button>Pesan Sekarang</button>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="font-size: 9px;
+                                    text-align: left;
+                                    padding-top: 8px;">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span></td>
+                                    <td style="text-align: right;"><span class="badge" style="font-size: 8px;background-color: #89BF43;">Kg</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 11px;
+                                    font-weight: 800;text-align: left;">SP-36</td>
+                                    <td style="text-align: right;"><p style="font-weight: bold;
+                                        font-size: 8px;">Rp.69.000,-</p></td>
+                                </tr>
+
+                            </table>
+                            <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
                         </div>
                     </div>
                     <div class="category-product-wrapper">
@@ -157,32 +221,27 @@
                             <img src="<?php echo base_url() ?>img/pupuk-organik-5.jpg"/>
                         </div>
                         <div class="product-category-overview">
-                            <p>Pupuk Organik</p>
-                            <p style="font-weight: bold;
-                            font-size: 12px;">Rp.69.000,-</p>
-                            <button>Pesan Sekarang</button>
-                        </div>
-                    </div>
-                    <div class="category-product-wrapper">
-                        <div class="image-product-category">
-                            <img src="<?php echo base_url() ?>img/pupuk-organik-5.jpg"/>
-                        </div>
-                        <div class="product-category-overview">
-                            <p>Pupuk Organik</p>
-                            <p style="font-weight: bold;
-                            font-size: 12px;">Rp.69.000,-</p>
-                            <button>Pesan Sekarang</button>
-                        </div>
-                    </div>
-                    <div class="category-product-wrapper">
-                        <div class="image-product-category">
-                            <img src="<?php echo base_url() ?>img/pupuk-organik-5.jpg"/>
-                        </div>
-                        <div class="product-category-overview">
-                            <p>Pupuk Organik</p>
-                            <p style="font-weight: bold;
-                            font-size: 12px;">Rp.69.000,-</p>
-                            <button>Pesan Sekarang</button>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="font-size: 9px;
+                                    text-align: left;
+                                    padding-top: 8px;">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span></td>
+                                    <td style="text-align: right;"><span class="badge" style="font-size: 8px;background-color: #89BF43;">Kg</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 11px;
+                                    font-weight: 800;text-align: left;">NPK Phonska</td>
+                                    <td style="text-align: right;"><p style="font-weight: bold;
+                                        font-size: 8px;">Rp.69.000,-</p></td>
+                                </tr>
+
+                            </table>
+                            <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
                         </div>
                     </div>
                 </div>
