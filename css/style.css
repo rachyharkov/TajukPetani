@@ -54,14 +54,8 @@ body {
     background-color: #8FBE00;
   }
 
-  .category-button-slide {
-    overflow: auto;
-    white-space: nowrap;
-    padding: 8px 2px;
-  }
 
-  div.category-button-slide button {
-    display: inline-block;
+  div.category-button-slide ul li button {
     color: black;
     border-radius: 45px;
     box-shadow: 0px 0px 0px 0px;
@@ -72,7 +66,20 @@ body {
     padding-top: 10px;
   }
 
-  div.category-button-slide button:hover {
+  div.category-button-slide ul {
+    white-space: nowrap !important;
+    overflow-x: auto;
+    display: block;
+    padding: 8px 2px;
+  }
+
+  div.category-button-slide ul li {
+    display: inline-block;
+    float: none;
+    clear: both;
+  }
+
+  div.category-button-slide ul li button.active {
     transition: all 200ms ease-in-out;
     box-shadow: 0px 3px 3px 0px rgb(0 0 0 / 75%);
     position: relative;
