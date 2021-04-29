@@ -2,6 +2,9 @@
 
 body {
   font-family: 'Nunito', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 #warning-body {
@@ -10,6 +13,10 @@ body {
 
 .header {
   padding: 4vh 2vh;
+}
+
+#body {
+  flex-grow: 1;
 }
 
 .search-box {
@@ -178,6 +185,42 @@ body {
 
   .checked {
     color: orange;
+  }
+
+  .swiper-container {
+    width: 100%;
+    height: 14em;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    padding: 0 2vh 4vh 2vh;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  .product-detail-image-wrapper {
+    background: blue;
+    height: 100%;
+    width: 100%;
+    border-radius: 16px;;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #89BF43 !important;
   }
 
   @media only screen and (min-width: 768px) {

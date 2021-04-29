@@ -24,4 +24,11 @@ class Home extends CI_Controller {
 		$this->load->view('visitor/index');
 		$this->load->view('visitor/footer');
 	}
+
+	public function detail_product()
+	{
+		$this->load->view('visitor/header');
+		$this->load->view('visitor/detail_product');
+		$this->load->view('visitor/footer');
+	}
 }

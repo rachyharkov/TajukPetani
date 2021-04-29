@@ -11,6 +11,9 @@
     <!--custom CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/style.css">
 
+    <!--Plugin-->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
     <title>Hello, world!</title>
     <script src="https://kit.fontawesome.com/fd0c5ab4fe.js" crossorigin="anonymous"></script>
     <style>
