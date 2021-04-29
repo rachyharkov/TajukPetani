@@ -1,7 +1,15 @@
         
     </div>
-    <div class="container footer" style="padding: 13px 0;text-align: center;">
-        <p>By Kelompok 1 - Teknologi Informasi</p>
+    <div class="container-fluid footer" style="position: sticky; bottom: 0; background: white;">
+      <div class="row">
+        <div class="col-7" style="padding: 12px;">
+          <p style="margin: 0; font-size: 17px; font-weight: bold;">Rp.25.000,-</p>
+          <p style="font-size: 8px; margin: 0;">Harga untuk per-item nya</p>
+        </div>
+        <div class="col-5" style="padding: 12px;">
+          <a class="btn btn-success" style="">Ambil Barang</a>
+        </div>    
+      </div>
     </div>
       
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>

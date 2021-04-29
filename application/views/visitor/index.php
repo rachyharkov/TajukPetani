@@ -80,7 +80,7 @@
                                         </tr>
 
                                     </table>
-                                    <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                                    <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                                 </div>
                             </div>
                             <div class="category-product-wrapper">
@@ -108,7 +108,7 @@
                                         </tr>
 
                                     </table>
-                                    <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                                    <a class="link-to" href="<?php echo base_url() ?>Home/detail_product"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                                 </div>
                             </div>
                             <div class="category-product-wrapper">
@@ -136,7 +136,7 @@
                                         </tr>
 
                                     </table>
-                                    <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                                    <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                                 </div>
                             </div>
                             
@@ -173,7 +173,7 @@
                                         </tr>
 
                                     </table>
-                                    <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                                    <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                                 </div>
                             </div>
                             <div class="category-product-wrapper">
@@ -201,7 +201,7 @@
                                         </tr>
 
                                     </table>
-                                    <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                                    <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                                 </div>
                             </div>
                             <div class="category-product-wrapper">
@@ -229,7 +229,7 @@
                                         </tr>
 
                                     </table>
-                                    <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                                    <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                                 </div>
                             </div>
                             
@@ -277,7 +277,7 @@
                                 </tr>
 
                             </table>
-                            <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                            <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                         </div>
                     </div>
                     <div class="category-product-wrapper">
@@ -305,7 +305,7 @@
                                 </tr>
 
                             </table>
-                            <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                            <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                         </div>
                     </div>
                     <div class="category-product-wrapper">
@@ -333,7 +333,7 @@
                                 </tr>
 
                             </table>
-                            <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                            <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                         </div>
                     </div>
                 </div>

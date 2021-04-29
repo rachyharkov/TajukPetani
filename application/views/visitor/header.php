@@ -24,4 +24,7 @@
     <div id="warning-body">
         <p style="margin: auto;">Silahkan buka web ini pada perangkat ponsel</p>
     </div>
+    <div id="loading">
+      <img src="<?php echo base_url() ?>img/loading.svg">
+    </div>
     <div id="body">
