@@ -27,4 +27,7 @@
     <div id="loading">
       <img src="<?php echo base_url() ?>img/loading.svg">
     </div>
+    <div id="loading-back">
+      <img src="<?php echo base_url() ?>img/loading.svg">
+    </div>
     <div id="body">

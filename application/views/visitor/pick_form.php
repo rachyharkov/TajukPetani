@@ -48,54 +48,49 @@
 
   <div class="container-fluid" style="background: #F0EEEE;
   border-top-left-radius: 24px;
-  border-top-right-radius: 24px; display:grid; grid-template-columns: 0.1fr 1fr;
-  grid-template-rows: repeat(6,auto);padding-top: 4vh;">
-    <div>
-      <img class="image-fluid" style="margin: 1em;" src="<?php echo base_url() ?>img/box.png"/> 
-    </div>
-    <div>
-      <p style="font-size: 13px;
+  border-top-right-radius: 24px; display:grid;grid-template-columns: 0.1fr 1fr 5em;
+    grid-template-rows: repeat(6,auto);padding-top: 4vh;">
+    <div style="grid-column-start: 1; grid-column-end: 4;">
+      <p style="font-size: 15px;
       font-weight: bold;
-      margin: 0;">Ambil barang langsung ke Koperasi</p>
-      <p style="font-size: 11px; margin:0;">Buat janji untuk  transaksi dan mengambil barang di koperasi setempat </p>
+      margin-bottom: 8px;">Form Pengambilan Barang</p>
     </div>
-    <div>
-      <img class="image-fluid" style="margin: 1em; width: 25px; height: auto;" src="<?php echo base_url() ?>img/house.png"/> 
-    </div>
-    <div style="padding-top: 10px;">
+    <div style="grid-column-start: 1; grid-column-end: 4; margin-bottom: 6px;">
       <p style="font-size: 13px;
       font-weight: bold;
       margin: 0;">Koperasi Anugerah Jaya - KWI001/21 <span><img src="<?php echo base_url() ?>img/verified.svg" style="height: 12px;width:auto;"></span></p>
       <p style="font-size: 11px; margin:0;">Desa Harapan Jaya RT/RW.003/008 No.32</p>
     </div>
-    <div style="
-    grid-column-start: 1;
-    grid-column-end: 3;
-    min-height: 200px;
-    overflow: auto;
-    margin-top: 15px;padding: 0 15px;">
-      <p style="font-size: 13px; font-weight: bold;margin: 1rem 0 1vh 0;">Detail Produk</p>
-      <table style="font-size: 12px;">
-        <tr>
-          <td style="width: 75%;">Kondisi</td>
-          <td>Baru</td>
-        </tr>
-        <tr>
-          <td>Min. Pemesanan</td>
-          <td>1 Karung</td>
-        </tr>
-        <tr>
-          <td>Berat</td>
-          <td>32 Kg</td>
-        </tr>
-        <tr>
-          <td>Status Ketersediaan</td>
-          <td>Tersedia</td>
-        </tr>
-      </table>
-
-      <p style="font-size: 13px; font-weight: bold;margin: 1rem 0 1vh 0;">Deskripsi</p>
-      <p style="font-size: 12px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus assumenda voluptatum illo libero, nobis quaerat. Veniam obcaecati fugit natus molestias harum, voluptates perferendis iusto atque laborum. Minima labore minus aspernatur.</p>
+    <div>
+      <img class="image-fluid" style="margin: 0.4em;
+      width: 58px;
+      height: auto;" src="<?php echo base_url() ?>img/detail-pic.png"/> 
+    </div>
+    <div style="padding-top: 10px;">
+      <p style="font-size: 13px;
+      font-weight: bold;
+      margin: 0;">Nama Barang</p>
+      <p style="font-size: 11px; margin:0;">Rp 85.000</p>
+    </div>
+    <div style="display: flex;
+    margin: auto;">
+      <button id="btn-decrease" style="border: 2px solid rgba(0, 0, 0, 0.4);
+      border-radius: 1.2em;
+      height: 25px;
+      width: 25px;
+      position: relative;"><span style="position: absolute;top: -2px;
+    left: 7px;">-</span></button><input class="tbnominal" type="number" name="nominal" value="0" style="
+    outline: none;
+    text-align: center;
+    width: 27%;
+    border: 0px solid #000000;
+    border-bottom-width: 1px;
+    background-color: transparent;padding: 0;
+    margin: 0 5px;"><button id="btn-increase" style="border: 2px solid #89BF43;
+      border-radius: 1.2em;
+      height: 25px;
+      width: 25px;
+      position: relative;"><span style="position: absolute;top: -2px;left: 5px; font-weight: bold; color:#89BF43">+</span></button>
     </div>
   </div>
 </div>
