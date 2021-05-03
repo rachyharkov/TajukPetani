@@ -19,6 +19,33 @@ body {
 
 #body {
   flex-grow: 1;
+  transition: all 250ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#drawer-container {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  display: grid;
+  right: -100%;
+  width: 100%;
+  height: 100%;
+  background: #f3f3f3;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 33px);
+  padding: 14em 1em 0 1em;
+  transition: all 250ms ease-in-out;
+}
+
+.drawer-active {
+  right: -28%!important;
+  transition: all 250ms ease-in-out !important;
+}
+
+#btnclosedrawer {
+  position: absolute;
+  top: 2em;
+  left: 13em;
 }
 
 #loading {
@@ -284,9 +311,12 @@ body {
   @media only screen and (min-width: 768px) {
     /* For desktop: */
     #warning-body {
-      display: block;
       width: auto;
       height: 100vh;
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: column;
+
     }
 
     #body, #body * {

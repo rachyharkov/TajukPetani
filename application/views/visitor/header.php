@@ -14,7 +14,7 @@
     <!--Plugin-->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
-    <title>Hello, world!</title>
+    <title><?php echo $title; ?></title>
     <script src="https://kit.fontawesome.com/fd0c5ab4fe.js" crossorigin="anonymous"></script>
     <style>
         
@@ -22,12 +22,21 @@
   </head>
   <body>
     <div id="warning-body">
-        <p style="margin: auto;">Silahkan buka web ini pada perangkat ponsel</p>
+        <p style="margin: auto;">Maaf untuk tampilan website saat ini masih dalam pengerjaan
+Silahkan buka di smartphone Anda.</p>
+
     </div>
-    <div id="loading">
+    <div id="loading" class="wait">
       <img src="<?php echo base_url() ?>img/loading.svg">
     </div>
     <div id="loading-back">
       <img src="<?php echo base_url() ?>img/loading.svg">
+    </div>
+    <div id="drawer-container">
+      <button id="btnclosedrawer">X</button>
+      <a href="#">Transaksi Anda</a>
+      <a href="#">Rekomendasi</a>
+      <a href="#">Pengaturan User</a>
+      <a href="#">Log Out</a>
     </div>
     <div id="body">

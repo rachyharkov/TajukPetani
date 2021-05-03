@@ -18,9 +18,20 @@ class Home extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	function __construct()
+    {
+        parent::__construct();
+        $this->load->model('visitor_model');
+        $this->load->library('form_validation');        
+		$this->load->helper(array('form', 'url','text'));
+    }
+
 	public function index()
 	{
-		$this->load->view('visitor/header');
+		$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('Pupuk');
+		$data['title'] = 'Beranda - Tajuk Petani Web App';
+		$this->load->view('visitor/header',$data);
 		$this->load->view('visitor/index');
 		$this->load->view('visitor/footer');
 	}
