@@ -24,6 +24,15 @@
     <div id="warning-body">
         <p style="margin: auto;">Maaf untuk tampilan website saat ini masih dalam pengerjaan
 Silahkan buka di smartphone Anda.</p>
+        <div class="footer-warning-fun">
+          <img src="<?php echo base_url() ?>img/footer-image.png" style="width: 100%; height: auto; display: block;">
+          <p style="position: absolute;
+    bottom: 4em;
+    right: 34%;
+    transform: translateY(50%);
+    font-weight: bold;
+    color: white;">By Kelompok 1 - Teknologi Informasi</p>
+        </div>
 
     </div>
     <div id="loading" class="wait">
@@ -33,10 +42,11 @@ Silahkan buka di smartphone Anda.</p>
       <img src="<?php echo base_url() ?>img/loading.svg">
     </div>
     <div id="drawer-container">
-      <button id="btnclosedrawer">X</button>
-      <a href="#">Transaksi Anda</a>
-      <a href="#">Rekomendasi</a>
-      <a href="#">Pengaturan User</a>
-      <a href="#">Log Out</a>
+      <button id="btnclosedrawer"><i class="fas fa-times"></i></button>
+      <a class="nav-link" href="<?php echo base_url() ?>login">Login</a>
+      <a class="nav-link" href="#">Transaksi Anda</a>
+      <a class="nav-link" href="#">Rekomendasi</a>
+      <a class="nav-link" href="#">Pengaturan User</a>
+      <a class="nav-link" href="#">Log Out</a>
     </div>
     <div id="body">

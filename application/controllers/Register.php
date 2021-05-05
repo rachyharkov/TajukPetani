@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Register extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -29,25 +29,6 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('Pupuk');
-		$data['title'] = 'Beranda - Tajuk Petani Web App';
-		$this->load->view('visitor/header',$data);
-		$this->load->view('visitor/index');
-		$this->load->view('visitor/footer');
-	}
-
-
-	public function detail_product()
-	{
-		$this->load->view('visitor/header');
-		$this->load->view('visitor/detail_product');
-		$this->load->view('visitor/footer_detail_product');
-	}
-
-	public function pick_form()
-	{
-		$this->load->view('visitor/header');
-		$this->load->view('visitor/pick_form');
-		$this->load->view('visitor/footer_pickform');
+		$this->load->view('register');
 	}
 }

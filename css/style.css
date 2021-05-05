@@ -9,8 +9,17 @@ body {
 
 /* { outline: 1px dotted red }*/
 
+a {
+  text-decoration: none;
+}
+
+
 #warning-body {
   display: none;
+}
+
+#footer-warning-fun {
+  display: none; 
 }
 
 .header {
@@ -35,6 +44,12 @@ body {
   grid-template-rows: repeat(4, 33px);
   padding: 14em 1em 0 1em;
   transition: all 250ms ease-in-out;
+  grid-row-gap: 18px;
+}
+
+.nav-link {
+  color: black;
+  font-weight: 500;
 }
 
 .drawer-active {
@@ -46,6 +61,7 @@ body {
   position: absolute;
   top: 2em;
   left: 13em;
+  border: none;
 }
 
 #loading {
@@ -308,6 +324,25 @@ body {
     background-color: #89BF43 !important;
   }
 
+  .bpatext {
+    display: flex;
+    flex-direction: row;
+    color: #e2e2e2;
+    margin: 2rem 0;
+  }
+  .bpatext:before, .bpatext:after{
+    content: "";
+    flex: 1 1;
+    border-bottom: 1px solid;
+    margin: auto;
+  }
+  .bpatext:before {
+    margin-right: 10px
+  }
+  .bpatext:after {
+    margin-left: 10px
+  }
+
   @media only screen and (min-width: 768px) {
     /* For desktop: */
     #warning-body {
@@ -319,7 +354,21 @@ body {
 
     }
 
+    .footer-warning-fun {
+      display: block;
+      padding: 0;  
+      position: relative;
+    }
+
     #body, #body * {
+      display: none;
+    }
+
+    .bg-login {
+      display: none;
+    }
+
+    .footer {
       display: none;
     }
   }
