@@ -1,21 +1,39 @@
 
         <div class="header">
+            <?php foreach($qinfo as $i) {
+
+            ?>
+
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-9">
                         <h4 style="font-size: 3vh;
-                        margin: 0; font-weight: bold;">Hello, Roedy!</h4>
-                        <p style="font-size: 2vh;">Selamat Datang di Tajuk Petani Portal</p>
+                        margin: 0; font-weight: bold;"><?php
+                        $t = date("H");
+
+                        if ($t < "11") {
+                          echo "Selamat Pagi, ";
+                        } elseif ($t < "15") {
+                          echo "Selamat Siang, ";
+                        } elseif ($t < "18") {
+                          echo "Selamat Sore, ";
+                        } else {
+                          echo "Selamat Malam, ";
+                        }
+                        ?><?php echo $i->nama?>!</h4>
+                        <p style="font-size: 2vh;">Portal Tajuk Petani untuk <?php echo $i->role?></p>
                     </div>
                     <div class="col-3" style="text-align: right;">
                         <div class="wrapper-pp">
-                            <a href="#">
+                            <a id="btnprofile" href="#">
                                 <img class="img-fluid" src="<?php echo base_url() ?>img/profile-p.png" style="width: 7vh;"/>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
+            <?php
+            } ?>
             <div class="container" style="margin-top: 10px;">
                 <div class="search-box">
                     <form class='search-form'>
@@ -55,6 +73,10 @@
                     <h4 style="font-weight: bold;">Pupuk Unggulan</h4>
                     <div class="row-fluid">
                         <div class="category-product-slider">
+                            <?php
+                            foreach($listfiveproductspupuk as $v) {
+
+                            ?>
                             <div class="category-product-wrapper">
                                 <div class="image-product-category">
                                     <img src="<?php echo base_url() ?>img/pupuk-organik-5.jpg"/>
@@ -65,81 +87,27 @@
                                             <td style="font-size: 9px;
                                             text-align: left;
                                             padding-top: 8px;">
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span></td>
-                                            <td style="text-align: right;"><span class="badge" style="font-size: 8px;background-color: #89BF43;">Kg</span></td>
+                                                <span class="fa fa-star <?php echo $v->rating <= 1 ? '':'checked'; ?>"></span>
+                                                <span class="fa fa-star <?php echo $v->rating <= 2 ? '':'checked'; ?>"></span>
+                                                <span class="fa fa-star <?php echo $v->rating <= 3 ? '':'checked'; ?>"></span>
+                                                <span class="fa fa-star <?php echo $v->rating <= 4 ? '':'checked'; ?>"></span>
+                                                <span class="fa fa-star <?php echo $v->rating <= 5 ? '':'checked'; ?>"></span></td>
+                                            <td style="text-align: right;"><span class="badge" style="font-size: 8px;background-color: #89BF43;"><?php echo $v->jenis_satuan ?></span></td>
                                         </tr>
                                         <tr>
                                             <td style="font-size: 11px;
-                                            font-weight: 800; text-align: left;">Organik</td>
+                                            font-weight: 800; text-align: left;"><?php echo $v->nama_produk ?></td>
                                             <td style="text-align: right;"><p style="font-weight: bold;
-                                                font-size: 8px;">Rp.69.000,-</p></td>
+                                                font-size: 8px;">Rp.<?php echo number_format($v->harga) ?>,-</p></td>
                                         </tr>
 
                                     </table>
-                                    <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                                    <a class="link-to" href="<?php echo base_url() ?>Home/detail_product"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                                 </div>
                             </div>
-                            <div class="category-product-wrapper">
-                                <div class="image-product-category">
-                                    <img src="<?php echo base_url() ?>img/pupuk-organik-5.jpg"/>
-                                </div>
-                                <div class="product-category-overview">
-                                    <table style="width: 100%;">
-                                        <tr>
-                                            <td style="font-size: 9px;
-                                            text-align: left;
-                                            padding-top: 8px;">
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span></td>
-                                            <td style="text-align: right;"><span class="badge" style="font-size: 8px;background-color: #89BF43;">Kg</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="font-size: 11px;
-                                            font-weight: 800;text-align: left;">SP-36</td>
-                                            <td style="text-align: right;"><p style="font-weight: bold;
-                                                font-size: 8px;">Rp.69.000,-</p></td>
-                                        </tr>
-
-                                    </table>
-                                    <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
-                                </div>
-                            </div>
-                            <div class="category-product-wrapper">
-                                <div class="image-product-category">
-                                    <img src="<?php echo base_url() ?>img/pupuk-organik-5.jpg"/>
-                                </div>
-                                <div class="product-category-overview">
-                                    <table style="width: 100%;">
-                                        <tr>
-                                            <td style="font-size: 9px;
-                                            text-align: left;
-                                            padding-top: 8px;">
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span></td>
-                                            <td style="text-align: right;"><span class="badge" style="font-size: 8px;background-color: #89BF43;">Kg</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="font-size: 11px;
-                                            font-weight: 800;text-align: left;">SP-36</td>
-                                            <td style="text-align: right;"><p style="font-weight: bold;
-                                                font-size: 8px;">Rp.69.000,-</p></td>
-                                        </tr>
-
-                                    </table>
-                                    <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
-                                </div>
-                            </div>
-                            
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
 
@@ -173,7 +141,7 @@
                                         </tr>
 
                                     </table>
-                                    <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                                    <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                                 </div>
                             </div>
                             <div class="category-product-wrapper">
@@ -201,7 +169,7 @@
                                         </tr>
 
                                     </table>
-                                    <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                                    <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                                 </div>
                             </div>
                             <div class="category-product-wrapper">
@@ -229,7 +197,7 @@
                                         </tr>
 
                                     </table>
-                                    <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                                    <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                                 </div>
                             </div>
                             
@@ -277,7 +245,7 @@
                                 </tr>
 
                             </table>
-                            <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                            <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                         </div>
                     </div>
                     <div class="category-product-wrapper">
@@ -305,7 +273,7 @@
                                 </tr>
 
                             </table>
-                            <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                            <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                         </div>
                     </div>
                     <div class="category-product-wrapper">
@@ -333,7 +301,7 @@
                                 </tr>
 
                             </table>
-                            <button><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                            <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                         </div>
                     </div>
                 </div>

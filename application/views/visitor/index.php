@@ -4,7 +4,19 @@
                 <div class="row">
                     <div class="col-9">
                         <h4 style="font-size: 3vh;
-                        margin: 0; font-weight: bold;">Hello, Roedy!</h4>
+                        margin: 0; font-weight: bold;"><?php
+                        $t = date("H");
+
+                        if ($t < "11") {
+                          echo "Selamat Pagi";
+                        } elseif ($t < "15") {
+                          echo "Selamat Siang";
+                        } elseif ($t < "18") {
+                          echo "Selamat Sore";
+                        } else {
+                          echo "Selamat Malam";
+                        }
+                        ?></h4>
                         <p style="font-size: 2vh;">Selamat Datang di Tajuk Petani Portal</p>
                     </div>
                     <div class="col-3" style="text-align: right;">

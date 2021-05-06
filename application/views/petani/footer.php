@@ -1,8 +1,10 @@
-<div class="container" style="padding: 13px 0;text-align: center;">
-            <p>By Kelompok 1 - Teknologi Informasi</p>
-        </div>
+        
     </div>
-
+    <div class="container footer" style="padding: 13px 0;text-align: center;">
+        <p>By Kelompok 1 - Teknologi Informasi</p>
+    </div>
+      
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -13,5 +15,40 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    $(window).on('load',function() {
+      $("#loading").removeClass("wait");
+      console.log("loaded!");
+    });
+
+    $(document).ready(function(){
+      $(".link-to").click(function(){
+        $("#loading").addClass("wait");
+      });
+
+      $("#btnprofile").click(function(e){
+        $("#drawer-container").addClass("drawer-active");
+        $('#body').css('opacity','0.2');
+        e.preventDefault();
+      });
+
+      
+      $('#btnclosedrawer').click(function(e){
+        $("#drawer-container").removeClass("drawer-active");
+        $('#body').css('opacity','1');
+        e.preventDefault();
+      });
+
+
+      var swiper = new Swiper('.swiper-container', {
+        pagination: {
+          el: '.swiper-pagination',
+          dynamicBullets: true,
+        },
+      });
+    })
+    </script>
   </body>
 </html>

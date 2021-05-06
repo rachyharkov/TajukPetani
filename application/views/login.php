@@ -67,13 +67,20 @@
         <div class="container" style="color: white;
         flex: 1 0 50%;
         min-height: 77vh;padding: 0 3vh;">
-            <h1 style="margin: 2em 0;">Akun Tajuk Petani Login</h1>
-            <label for="tbnotelp" class="form-label">Email address</label>
+            <h1 style="margin: 2em 0;">Login TajukPetani System</h1>
+            <div class="textwarning" style="width: 100%;"></div>
+            <label id="labellogin" class="form-label">No Telepon</label>
             <input type="number" class="form-control" id="tbnotelp" aria-describedby="notelpHelp" style="border: none;
             border-radius: 65px;">
-            <div id="notelpHelp" class="form-text" style="color: #e0e0e0;">Contoh: 081234567890</div>
+            <input type="number" class="form-control" id="tbotp" aria-describedby="otpHelp" style="border: none;
+            border-radius: 65px; display: none;">
+            <div id="texthelp" class="form-text" style="color: #e0e0e0;">Contoh: 081234567890</div>
             <p><a href="Lupa login anda?"></a></p>
-            <button class="btn btn-success" style="width: 100%;
+            <button class="btn btn-success" id="btnloginbynotelf" style="width: 100%;
+            background: #89BF43;
+            font-weight: 700;
+            border: none;">Selanjutnya</button>
+            <button class="btn btn-success" id="btnreallogin" style="display: none; width: 100%;
             background: #89BF43;
             font-weight: 700;
             border: none;">Login</button>
@@ -101,7 +108,12 @@
     -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.min.js"></script>
     <script type="text/javascript">
+
+    var baseUrl = "<?= base_url();?>";
+    var siteUrl = "<?= site_url();?>";
+
     $(window).on('load',function() {
       $("#loading").removeClass("wait");
       console.log("loaded!");
@@ -125,13 +137,82 @@
         e.preventDefault();
       });
 
+      $('#btnloginbynotelf').click(function(){
+        var tbnotelp = $("#tbnotelp").val();
 
-      var swiper = new Swiper('.swiper-container', {
-        pagination: {
-          el: '.swiper-pagination',
-          dynamicBullets: true,
-        },
+        if(tbnotelp.length == "") {
+          Swal.fire({
+            type: 'warning',
+            title: 'Oops...',
+            text: 'Username Wajib Diisi !'
+            });
+          } else {
+            $('#btnloginbynotelf').html('<div class="spinner-border spinner-border-sm text-light" role="status"></div>');
+            
+            $(this).attr('disabled','disabled');
+            $.ajax({
+                url:  baseUrl + "verification/loginkeun",
+                type: "POST",
+                data: {tbnotelp:tbnotelp},
+                success:function(data){
+                  if (data == "ok") {
+                    $('#btnloginbynotelf').css('display','none');
+                    $('#labellogin').html('Kode OTP');
+                    $('#texthelp').html('');
+                    $('.textwarning').html('<div class="alert alert-success alert-dismissible fade show" role="alert" style="font-size: 12px; padding: 8px;">Masukan kode OTP yang dikirim melalui SMS<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding: 1em;"></button></div>');
+                    $('#tbnotelp').css('display','none');
+                    $('#tbotp').css('display','block');
+                    $('#btnreallogin').css('display','block');
+                  } else {
+                    $('.textwarning').html('<div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 12px; padding: 8px;">Nomor Telefon tidak terdaftar di sistem kami<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding: 1em;"></button></div>');
+                    $('#btnloginbynotelf').html('Selanjutnya');
+                    $('#btnloginbynotelf').removeAttr('disabled');
+                  }
+                  console.log(data);
+                },
+                error:function(data){
+                Swal.fire({
+                  type: 'error',
+                  title: 'Opps!',
+                  text: 'server error!'
+                });
+                console.log(data);
+                $('#btnloginbynotelf').html('Selanjutnya');
+                $('#btnloginbynotelf').removeAttr('disabled');
+              }
+            });
+          }
       });
+
+      $("#btnreallogin").click(function(){
+        var tbnotelp = $("#tbnotelp").val();
+        var tbotp = $("#tbotp").val();
+        
+        $.ajax({
+          url:  baseUrl + "verification/checkpassword",
+          type: "POST",
+          data: {'<?php echo $this->security->get_csrf_token_name(); ?>':'<?php echo $this->security->get_csrf_hash(); ?>',tbnotelp:tbnotelp,tbotp:tbotp},
+          success:function(data){
+          	if(data == "petani"){
+                $("#loading").addClass("wait");
+                window.location.href = baseUrl + "petani/index";  
+            } else if (data == "koperasi") {
+              $("#loading").addClass("wait");
+              window.location.href = baseUrl + "koperasi/index";
+            } else if(data == "admin") {
+              Swal.fire({
+                type: 'error',
+                title: 'Login Gagal!',
+                text: 'Ngapain njir!'
+              });
+            } else {
+              $('.textwarning').html('<div class="alert alert-danger alert-once alert-dismissible fade show" role="alert" style="font-size: 12px; padding: 8px;">Kode OTP salah, mohon cek kembali<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding: 1em;"></button></div>');
+            }
+            console.log(data);
+            }
+          })
+      });
+      
     })
     </script>
   </body>

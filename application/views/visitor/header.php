@@ -47,6 +47,5 @@ Silahkan buka di smartphone Anda.</p>
       <a class="nav-link" href="#">Transaksi Anda</a>
       <a class="nav-link" href="#">Rekomendasi</a>
       <a class="nav-link" href="#">Pengaturan User</a>
-      <a class="nav-link" href="#">Log Out</a>
     </div>
     <div id="body">

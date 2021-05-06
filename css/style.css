@@ -343,6 +343,21 @@ a {
     margin-left: 10px
   }
 
+  .alert-once {
+    animation: pulse 1s; 
+  }
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    70% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+   }
+
   @media only screen and (min-width: 768px) {
     /* For desktop: */
     #warning-body {
