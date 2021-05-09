@@ -198,12 +198,12 @@ a {
     margin-top: 2vh;
   }
 
-  .category-product-wrapper:last-child {
-    margin-left: 5px;
+  .category-product-slider > div:first-child {
+    margin-left: 1em !important;
   }
 
-  .category-product-wrapper:first-child {
-    margin-right: 5px;
+  .category-product-slider > div:last-child {
+    margin-right: 1em !important;
   }
 
   .category-product-slider .category-product-wrapper {
@@ -216,6 +216,56 @@ a {
     width: 150px;
     border-radius: 15px;
   }
+
+  .weather-card-slider {
+    font-size: 14px;
+    height: 130px;
+    white-space: nowrap;
+    position: relative;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 2vh;
+  }
+
+  .weather-card-slider > div:first-child {
+    margin-left: 1em !important;
+  }
+
+  .weather-card-slider > div:last-child {
+    margin-right: 1em !important;
+  }
+
+  .weather-card-slider .weather-card {
+    background-color: white;
+    float: none;
+    height: 100%;
+    margin: 0 5px;
+    display: inline-block;
+    position: relative;
+    width: 113px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+  }
+
+  .weather-card {
+    display: flex; 
+    flex-direction: column;
+    padding: 7px;
+  }
+
+  .cerah {
+    background: linear-gradient(180deg, #FCE93C 0%, rgba(255, 237, 77, 0) 82.02%);
+  }
+
+  .hujan {
+    background: linear-gradient(180deg, #ACACA9 53.53%, #FFFFFF 100%);
+  }
+
+  .cerahberawan {
+    background: linear-gradient(180deg, #87C7F5 53.53%, #FFFFFF 99.8%);
+  }
+
 
   .image-product-category {
     height: 100%;

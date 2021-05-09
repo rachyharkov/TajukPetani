@@ -39,8 +39,95 @@
                 </div>
             </div>
         </div>
+
         <div class="container">
-            <h4 style="font-weight: bold;">Kategori</h4>
+            <h4 style="font-weight: bold;">Informasi Cuaca</h4>
+        </div>
+        <div class="container">
+            <div class="row-fluid">
+                <div class="weather-card-slider">
+                    <?php
+                        // simple xml
+                        $arrayCuaca = array(
+                            0 => "Cerah",
+                            1 => "Cerah Berawan",
+                            2 => "Cerah Berawan",
+                            3 => "Berawan",
+                            4 => "Berawan Tebal", 
+                            5 => "Udara Kabur",
+                            10 => "Asap",
+                            45 => "Kabut", 
+                            60 => "Hujan Ringan",
+                            61 => "Hujan Sedang",
+                            63 => "Hujan Lebat",
+                            80 => "Hujan Lokal",
+                            95 => "Hujan Petir",
+                            97 => "Hujan Petir"
+                        );
+                        $xml = simplexml_load_file("https://data.bmkg.go.id/DataMKG/MEWS/DigitalForecast/DigitalForecast-Lampung.xml");
+                        $dataCuaca = $xml->forecast->area[0]->parameter[6]->timerange;
+                        $dataKecepatanAngin = $xml->forecast->area[0]->parameter[9]->timerange;
+                        $dataKelembaban = $xml->forecast->area[0]->parameter[0]->timerange;
+                        foreach($dataCuaca as $cuaca){ 
+                            ?>
+                    
+                    <div class="weather-card cerah">
+                        <div style="display: grid; grid-template-columns: 0.5fr 1fr;">
+                            <div style="grid-row-start: 1;
+                            grid-row-end: 3;">
+                                <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="17" cy="17" r="11" fill="#FFB629"/>
+                                    <line x1="17.5" y1="2.18557e-08" x2="17.5" y2="5" stroke="black"/>
+                                    <line x1="17.5" y1="29" x2="17.5" y2="34" stroke="black"/>
+                                    <line x1="5" y1="17.5" x2="-4.37114e-08" y2="17.5" stroke="black"/>
+                                    <line x1="34" y1="17.5" x2="29" y2="17.5" stroke="black"/>
+                                    <line x1="7.59061" y1="24.8597" x2="4.05508" y2="28.3952" stroke="black"/>
+                                    <line x1="28.0967" y1="4.35355" x2="24.5612" y2="7.88909" stroke="black"/>
+                                    <line x1="8.18197" y1="8.88908" x2="4.64643" y2="5.35354" stroke="black"/>
+                                    <line x1="28.6881" y1="29.3952" x2="25.1525" y2="25.8596" stroke="black"/>
+                                </svg>    
+                            </div>
+                            <div style="text-align: center; font-weight: 600;">
+                                <p style="margin-bottom: 0.2rem;white-space: break-spaces;"><?php 
+                                $id = intVal($cuaca->value);
+                                $cuacanya = "out of borders";
+
+                                if(array_key_exists($id, $arrayCuaca)) {
+                                    $cuacanya = $arrayCuaca[$id];
+                                }
+                                echo $cuacanya;                      
+                                ?></p>
+                                
+                            </div>
+                            <div style="text-align: center; font-weight: 600;
+                            margin-bottom: 18px;">
+                                <p style="margin: 0;">28 / 22°C</p>
+                                <p style="margin: 0;
+                                font-size: 9px;
+                                color: #D6CFCF;
+                                margin-left: -18px;
+                                margin-top: -3px;">MAX &nbsp;&nbsp; MIN</p>
+                            </div>
+                        </div>
+                        <table style="width: 100%; font-size: 8px;position: absolute;
+    bottom: 6px;">
+                            <tr>
+                                <td>Kecepatan Angin</td>
+                                <td>10 km/h</td>
+                            </tr>
+                            <tr>
+                                <td>Kelembaban</td>
+                                <td>65%</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h4 style="font-weight: bold;">Unggulan</h4>
             <div class="category-button-slide">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -61,10 +148,9 @@
                 </ul>
             </div>
         </div>
-        <div class="container" style="margin-top: 14px;">
+        <div class="container" style="margin-top: 14px; padding: 0;">
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-category-pupuk" role="tabpanel" aria-labelledby="pills-categorypupuk-tab">
-                    <h4 style="font-weight: bold;">Pupuk Unggulan</h4>
                     <div class="row-fluid">
                         <div class="category-product-slider">
                             <?php
@@ -107,7 +193,6 @@
 
                 </div>
                 <div class="tab-pane fade" id="pills-category-bibit" role="tabpanel" aria-labelledby="pills-categorybibit-tab">
-                    <h4 style="font-weight: bold;">Bibit Unggulan</h4>
                     <div class="row-fluid">
                         <div class="category-product-slider">
                             <div class="category-product-wrapper">
