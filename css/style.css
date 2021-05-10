@@ -245,7 +245,7 @@ a {
     position: relative;
     width: 113px;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 15px;
+    border-radius: 10px;
   }
 
   .weather-card {
@@ -262,7 +262,7 @@ a {
     background: linear-gradient(180deg, #ACACA9 53.53%, #FFFFFF 100%);
   }
 
-  .cerahberawan {
+  .berawan {
     background: linear-gradient(180deg, #87C7F5 53.53%, #FFFFFF 99.8%);
   }
 
