@@ -36,6 +36,13 @@ class Home extends CI_Controller {
 		$this->load->view('visitor/footer');
 	}
 
+	public function home()
+	{
+		$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('Pupuk');
+		$data['title'] = 'Beranda - Tajuk Petani Web App';
+		$this->load->view('visitor/index',$data);
+	}
+
 
 	public function detail_product()
 	{
@@ -49,5 +56,20 @@ class Home extends CI_Controller {
 		$this->load->view('visitor/header');
 		$this->load->view('visitor/pick_form');
 		$this->load->view('visitor/footer_pickform');
+	}
+
+	public function account_menu()
+	{
+		$this->load->view('visitor/account');
+	}
+
+	public function order_menu()
+	{
+		$this->load->view('visitor/order');
+	}
+
+	public function koperasi_menu()
+	{
+		$this->load->view('visitor/koperasi');
 	}
 }

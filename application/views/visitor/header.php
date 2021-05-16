@@ -16,9 +16,8 @@
 
     <title><?php echo $title; ?></title>
     <script src="https://kit.fontawesome.com/fd0c5ab4fe.js" crossorigin="anonymous"></script>
-    <style>
-        
-    </style>
+    <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
+
   </head>
   <body>
     <div id="warning-body">
@@ -41,11 +40,8 @@ Silahkan buka di smartphone Anda.</p>
     <div id="loading-back">
       <img src="<?php echo base_url() ?>img/loading.svg">
     </div>
-    <div id="drawer-container">
-      <button id="btnclosedrawer"><i class="fas fa-times"></i></button>
-      <a class="nav-link" href="<?php echo base_url() ?>login">Login</a>
-      <a class="nav-link" href="#">Transaksi Anda</a>
-      <a class="nav-link" href="#">Rekomendasi</a>
-      <a class="nav-link" href="#">Pengaturan User</a>
+    <div id="loading-nav-menu">
+      <img src="<?php echo base_url() ?>img/loading.svg">
     </div>
+    
     <div id="body">
