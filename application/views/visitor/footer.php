@@ -47,56 +47,7 @@
     -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-    
-    /*function getPage(datas){
-      var mydiv = datas;
-      url = "<?php echo base_url('/Home');?>/" + mydiv;
-      $('#body').load(url);
-    }*/
-    
-    $(window).on('load',function() {
-      $("#loading").removeClass("wait");
-      console.log("loaded!");
-    });
-
-    $(document).ready(function(){
-      $(".link-to").click(function(){
-        $("#loading").addClass("wait");
-      });
-
-      $('.btn-nav').click(function(){
-        console.log(this.id);
-        $('#loading-nav-menu').css('display','block');
-        $('.btn-nav').removeClass('active-bottom-nav');
-        $('#'+this.id+'').addClass('active-bottom-nav');
-        
-        $.ajax({
-          type: 'get',
-          url: "<?php echo base_url('/Home');?>/" + this.id,
-          dataType: 'html',
-          success: function (html) {
-            // success callback -- replace the div's innerHTML with
-            // the response from the server.
-            $('#body').html(html);
-            $('#loading-nav-menu').css('display','none');
-          },
-          error: function (data) {
-            $('#body').html(data.status);
-            $('#loading-nav-menu').css('display','none');
-          }
-        });
-        
-      });
-
-
-      var swiper = new Swiper('.swiper-container', {
-        pagination: {
-          el: '.swiper-pagination',
-          dynamicBullets: true,
-        },
-      });
-    })
-    </script>
+    <script type="text/javascript"> var baseUrl = '<?php echo base_url(); ?>'; </script>
+    <script type="text/javascript" src="<?php echo base_url() ?>assets/js/visitor-js.js"></script>
   </body>
 </html>
