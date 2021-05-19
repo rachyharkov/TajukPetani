@@ -198,9 +198,15 @@
 
                             ?>
                             <div class="category-product-wrapper">
-                                <div class="image-product-category">
-                                    <img src="<?php echo base_url() ?>img/pupuk-organik-5.jpg"/>
-                                </div>
+                                
+                                    <?php
+                                        $img = explode(';', $v->gambar);
+                                        ?>
+                                            <img src="<?php echo base_url() ?>image-data/koperasi/<?php echo $img[0];?>"/>
+                                        <?php
+                                        
+                                    ?>
+                                
                                 <div class="product-category-overview">
                                     <table style="width: 100%;">
                                         <tr>
@@ -240,9 +246,15 @@
 
                             ?>
                             <div class="category-product-wrapper">
-                                <div class="image-product-category">
-                                    <img src="<?php echo base_url() ?>img/bibit-example.jpg"/>
-                                </div>
+                                
+                                    <?php
+                                        $img = explode(';', $v->gambar);
+                                        ?>
+                                            <img src="<?php echo base_url() ?>image-data/koperasi/<?php echo $img[0];?>"/>
+                                        <?php
+                                        
+                                    ?>
+                                
                                 <div class="product-category-overview">
                                     <table style="width: 100%;">
                                         <tr>
@@ -281,9 +293,15 @@
 
                             ?>
                             <div class="category-product-wrapper">
-                                <div class="image-product-category">
-                                    <img src="<?php echo base_url() ?>img/pupuk-organik-5.jpg"/>
-                                </div>
+                                
+                                    <?php
+                                        $img = explode(';', $v->gambar);
+                                        ?>
+                                            <img src="<?php echo base_url() ?>image-data/koperasi/<?php echo $img[0];?>"/>
+                                        <?php
+                                        
+                                    ?>
+                                
                                 <div class="product-category-overview">
                                     <table style="width: 100%;">
                                         <tr>

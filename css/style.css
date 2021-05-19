@@ -116,8 +116,10 @@ a {
 }
 .search-box.hovered,
 .search-box:hover,
-.search-box:active {
-  border: 1px solid #d0d0d0;
+.search-box:active,
+.search-box:focus {
+  transition: all 200ms ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .search-box input[type="text"] {
   border: none;
@@ -190,13 +192,14 @@ div.category-button-slide ul li button.active {
 
 .category-product-slider {
   font-size: 14px;
-  height: 12.5em;
+  height: 13.5em;
   white-space: nowrap;
   position: relative;
   overflow-x: scroll;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   margin-top: 2vh;
+  padding-bottom: 10px;
 }
 
 .category-product-slider > div:first-child {
@@ -216,17 +219,20 @@ div.category-button-slide ul li button.active {
   position: relative;
   width: 150px;
   border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  overflow: hidden;
 }
 
 .weather-card-slider {
   font-size: 14px;
-  height: 130px;
+  height: 160px;
   white-space: nowrap;
   position: relative;
   overflow-x: scroll;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   margin-top: 2vh;
+  padding-bottom: 18px;
 }
 
 .weather-card-slider > div:first-child {
@@ -241,11 +247,11 @@ div.category-button-slide ul li button.active {
   background-color: white;
   float: none;
   height: 100%;
-  margin: 0 5px;
+  margin: 0px 5px;
   display: inline-block;
   position: relative;
   width: 113px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
   border-radius: 10px;
 }
 
@@ -280,15 +286,12 @@ div.category-button-slide ul li button.active {
 }
 
 
-.image-product-category {
-  height: 100%;
-  width: 100%;
-}
 
-.image-product-category img {
+.category-product-wrapper img {
   width: 100%;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  overflow: hidden;
+  display: block;
+  transform: scale(1.3);
 }
 
 .product-category-overview {
@@ -409,14 +412,14 @@ a.link-button div img {
 }
 
 .alert-once {
-  animation: pulse 1s;
+  animation: pulse 450ms;
 }
 
 @keyframes pulse {
   0% {
     transform: scale(1);
   }
-  70% {
+  50% {
     transform: scale(1.1);
   }
   100% {
@@ -433,7 +436,7 @@ a.link-button div img {
   bottom: 0;
   background: rgba(242, 238, 238, 1);
   text-align: center;
-  padding: 5px;
+  padding: 7px;
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
 }

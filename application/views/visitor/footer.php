@@ -6,30 +6,30 @@
     <div class="bottom-nav">
       <div class="bottom-nav-wrapper">
         <button class="btn-nav active-bottom-nav" id="home">
-          <span class="iconify" data-inline="false" data-icon="fluent:home-16-filled" style="color: #00000030;display: block;"></span>
+          <span class="iconify" data-inline="false" data-icon="fluent:home-16-regular" style="color: #00000030;display: block;"></span>
+          <span class="iconify" data-inline="false" data-icon="fluent:home-16-filled" style="color: #00000030;display: none;"></span>
           <p>Beranda</p>
-          <!--<span class="iconify" data-inline="false" data-icon="fluent:home-12-regular" style="color: #89BF43;display: block;"></span>-->
         </button>
       </div>
       <div class="bottom-nav-wrapper">
         <button class="btn-nav" id="koperasi_menu">
           <span class="iconify" data-inline="false" data-icon="fluent:text-bullet-list-square-20-regular" style="color: #00000030; display: block;"></span>
+          <span class="iconify" data-inline="false" data-icon="fluent:text-bullet-list-square-20-filled" style="color: #00000030; display: none;"></span>
           <p>Koperasi</p>
-          <!--<span class="iconify" data-inline="false" data-icon="fluent:cart-16-filled" style="color: #00000030;display: block;"></span>-->
         </button>
       </div>
       <div class="bottom-nav-wrapper">
         <button class="btn-nav" id="order_menu">
           <span class="iconify" data-inline="false" data-icon="fluent:cart-16-regular" style="color: #00000030;display: block;"></span>
+          <span class="iconify" data-inline="false" data-icon="fluent:cart-16-filled" style="color: #00000030;display: none;"></span>
           <p>Pesanan</p>
-          <!--<span class="iconify" data-inline="false" data-icon="fluent:cart-16-filled" style="color: #00000030;display: block;"></span>-->
         </button>
       </div>
       <div class="bottom-nav-wrapper">
         <button class="btn-nav" id="account_menu">
           <span class="iconify" data-inline="false" data-icon="fluent:inprivate-account-16-regular" style="color: #00000030; display: block;"></span>
+          <span class="iconify" data-inline="false" data-icon="fluent:inprivate-account-16-filled" style="color: #00000030; display: none;"></span>
           <p>Akun</p>
-          <!--<span class="iconify" data-inline="false" data-icon="fluent:inprivate-account-16-filled" style="color: #00000030;"></span>-->
         </button>
       </div>
     </div>

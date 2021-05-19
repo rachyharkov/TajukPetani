@@ -86,11 +86,18 @@ $(document).ready(function () {
 		$("#loading").addClass("wait");
 	});
 
+
 	$(".btn-nav").click(function () {
 		console.log(this.id);
+
 		$("#loading-nav-menu").css("display", "block");
 		$(".btn-nav").removeClass("active-bottom-nav");
 		$("#" + this.id + "").addClass("active-bottom-nav");
+		$(".btn-nav svg:nth-child(1)").css("display","block");
+		$(".btn-nav svg:nth-child(2)").css("display","none");
+		$("#" + this.id + " > svg:nth-child(1)").css("display","none");
+		$("#" + this.id + " > svg:nth-child(2)").css("display","block");
+
 
 		$.ajax({
 			type: "get",
