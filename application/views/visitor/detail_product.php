@@ -20,26 +20,36 @@
   <div class="container-fluid">
     <div class="swiper-container">
       <div class="swiper-wrapper">
+        <?php
+        $gambar = explode(';', $gambar);
+        foreach ($gambar as $gam) {
+          ?>
+            <div class="swiper-slide">
+              <div class="product-detail-image-wrapper">
+                <img src="<?php echo base_url() ?>image-data/koperasi/<?php echo $gam ?>">
+              </div>
+            </div>
+          <?php
+        }
+        ?>
+        
+        <!--
+        add more images below
         <div class="swiper-slide">
           <div class="product-detail-image-wrapper">
-            <img src="<?php echo base_url() ?>img/detail-pic.png">
+            <img src="<?php //echo base_url() ?>img/detail-pic.png">
           </div>
         </div>
         <div class="swiper-slide">
           <div class="product-detail-image-wrapper">
-            <img src="<?php echo base_url() ?>img/detail-pic.png">
+            <img src="<?php //echo base_url() ?>img/detail-pic.png">
           </div>
         </div>
         <div class="swiper-slide">
           <div class="product-detail-image-wrapper">
-            <img src="<?php echo base_url() ?>img/detail-pic.png">
+            <img src="<?php //echo base_url() ?>img/detail-pic.png">
           </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="product-detail-image-wrapper">
-            <img src="<?php echo base_url() ?>img/detail-pic.png">
-          </div>
-        </div>
+        </div>-->
       </div>
       <!-- Add Pagination -->
       <div class="swiper-pagination"></div>
@@ -65,8 +75,8 @@
     <div style="padding-top: 10px;">
       <p style="font-size: 13px;
       font-weight: bold;
-      margin: 0;">Koperasi Anugerah Jaya - KWI001/21 <span><img src="<?php echo base_url() ?>img/verified.svg" style="height: 12px;width:auto;"></span></p>
-      <p style="font-size: 11px; margin:0;">Desa Harapan Jaya RT/RW.003/008 No.32</p>
+      margin: 0;"><?php echo $nama_koperasi; ?><span><img src="<?php echo base_url() ?>img/verified.svg" style="height: 12px;width:auto;"></span></p>
+      <p style="font-size: 11px; margin:0;"><?php echo $alamat_koperasi; ?></p>
     </div>
     <div style="
     grid-column-start: 1;
@@ -74,28 +84,52 @@
     min-height: 200px;
     overflow: auto;
     margin-top: 15px;padding: 0 15px;">
+      <p style="font-size: 17px; font-weight: bold;"><?php echo $nama_produk; ?></p>
       <p style="font-size: 13px; font-weight: bold;margin: 1rem 0 1vh 0;">Detail Produk</p>
       <table style="font-size: 12px;">
         <tr>
-          <td style="width: 75%;">Kondisi</td>
-          <td>Baru</td>
+          <td style="width: 60%;">Kondisi</td>
+          <td><?php echo $kondisi; ?></td>
         </tr>
         <tr>
           <td>Min. Pemesanan</td>
-          <td>1 Karung</td>
+          <td><?php echo $min_pemesanan; ?></td>
         </tr>
         <tr>
           <td>Berat</td>
-          <td>32 Kg</td>
+          <td><?php echo $berat; ?></td>
+        </tr>
+        <tr>
+          <td>Jenis Satuan</td>
+          <td><span class="badge" style="font-size: 8px;background-color: #89BF43;"><?php echo $jenis_satuan ?></span></td>
+        </tr>
+        <tr>
+          <td>Varian</td>
+          <td><?php echo $varian; ?></td>
         </tr>
         <tr>
           <td>Status Ketersediaan</td>
-          <td>Tersedia</td>
+          <td><?php echo $stok == 0 ? 'Kosong' : $stok; ?></td>
+        </tr>
+        <tr>
+          <td>Jenis Bantuan</td>
+          <td><?php echo $jenis_bantuan ?></td>
+        </tr>
+        <tr>
+          <td>Rating</td>
+          <td style="font-size: 9px;
+          text-align: left;">
+              <span class="fa fa-star <?php echo $rating <= 1 ? '':'checked'; ?>"></span>
+              <span class="fa fa-star <?php echo $rating <= 2 ? '':'checked'; ?>"></span>
+              <span class="fa fa-star <?php echo $rating <= 3 ? '':'checked'; ?>"></span>
+              <span class="fa fa-star <?php echo $rating <= 4 ? '':'checked'; ?>"></span>
+              <span class="fa fa-star <?php echo $rating <= 5 ? '':'checked'; ?>"></span>
+          </td>
         </tr>
       </table>
 
       <p style="font-size: 13px; font-weight: bold;margin: 1rem 0 1vh 0;">Deskripsi</p>
-      <p style="font-size: 12px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus assumenda voluptatum illo libero, nobis quaerat. Veniam obcaecati fugit natus molestias harum, voluptates perferendis iusto atque laborum. Minima labore minus aspernatur.</p>
+      <p style="font-size: 12px;"><?php echo $deskripsi; ?></p>
     </div>
   </div>
 </div>

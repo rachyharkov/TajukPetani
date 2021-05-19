@@ -166,8 +166,8 @@
             </div>
         </div>
 
-        <div class="container" style="margin-top: 1em;">
-            <h4 style="font-weight: bold;">Unggulan</h4>
+        <div class="container" style="margin-top: 1em;padding: 0;">
+            <h4 style="font-weight: bold;padding: 0 2vh;">Unggulan</h4>
             <div class="category-button-slide">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -177,13 +177,13 @@
                         <button class="btn btn-light" id="pills-BibitCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-bibit" type="button" role="tab" aria-controls="pills-category-bibit" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/bibit.png" style="height: 21px; margin-bottom: 5px;"/></span>Benih</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="btn btn-light" id="pills-UMKMCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-UMKM" type="button" role="tab" aria-controls="pills-category-UMKM" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/pesticide.png" style="height: 21px; margin-bottom: 5px;"/></span>Pestisida</button>
+                        <button class="btn btn-light" id="pills-PestisidaCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-pestisida" type="button" role="tab" aria-controls="pills-category-pestisida" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/pesticide.png" style="height: 21px; margin-bottom: 5px;"/></span>Pestisida</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="btn btn-light" id="pills-UMKMCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-UMKM" type="button" role="tab" aria-controls="pills-category-UMKM" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/groceries.png" style="height: 21px; margin-bottom: 5px;"/></span>Sembako</button>
+                        <button class="btn btn-light" id="pills-SembakoCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-sembako" type="button" role="tab" aria-controls="pills-category-sembako" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/groceries.png" style="height: 21px; margin-bottom: 5px;"/></span>Sembako</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="btn btn-light" id="pills-UMKMCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-UMKM" type="button" role="tab" aria-controls="pills-category-UMKM" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/rake.png" style="height: 21px; margin-bottom: 5px;"/></span>Alat Tani</button>
+                        <button class="btn btn-light" id="pills-AlattaniCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-alattani" type="button" role="tab" aria-controls="pills-category-alattani" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/rake.png" style="height: 21px; margin-bottom: 5px;"/></span>Alat Tani</button>
                     </li>
                 </ul>
             </div>
@@ -216,13 +216,13 @@
                                         </tr>
                                         <tr>
                                             <td style="font-size: 11px;
-                                            font-weight: 800; text-align: left;"><?php echo $v->nama_produk ?></td>
+                                            font-weight: 800; text-align: left;"><?php echo strlen($v->nama_produk ) > 15 ? substr($v->nama_produk ,0,15)."..." : $v->nama_produk; ?></td>
                                             <td style="text-align: right;"><p style="font-weight: bold;
                                                 font-size: 8px;">Rp.<?php echo number_format($v->harga) ?>,-</p></td>
                                         </tr>
 
                                     </table>
-                                    <a class="link-to" href="<?php echo base_url() ?>Home/detail_product"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
+                                    <a class="link-to" href="<?php echo base_url() ?>Home/detail_product/<?php echo $v->id_produk ?>"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                                 </div>
                             </div>
                             <?php
@@ -235,6 +235,10 @@
                 <div class="tab-pane fade" id="pills-category-bibit" role="tabpanel" aria-labelledby="pills-categorybibit-tab">
                     <div class="row-fluid">
                         <div class="category-product-slider">
+                            <?php
+                            foreach($listfiveproductsbibit as $v) {
+
+                            ?>
                             <div class="category-product-wrapper">
                                 <div class="image-product-category">
                                     <img src="<?php echo base_url() ?>img/bibit-example.jpg"/>
@@ -245,89 +249,85 @@
                                             <td style="font-size: 9px;
                                             text-align: left;
                                             padding-top: 8px;">
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span></td>
-                                            <td style="text-align: right;"><span class="badge" style="font-size: 8px;background-color: #89BF43;">Kg</span></td>
+                                                <span class="fa fa-star <?php echo $v->rating <= 1 ? '':'checked'; ?>"></span>
+                                                <span class="fa fa-star <?php echo $v->rating <= 2 ? '':'checked'; ?>"></span>
+                                                <span class="fa fa-star <?php echo $v->rating <= 3 ? '':'checked'; ?>"></span>
+                                                <span class="fa fa-star <?php echo $v->rating <= 4 ? '':'checked'; ?>"></span>
+                                                <span class="fa fa-star <?php echo $v->rating <= 5 ? '':'checked'; ?>"></span></td>
+                                            <td style="text-align: right;"><span class="badge" style="font-size: 8px;background-color: #89BF43;"><?php echo $v->jenis_satuan ?></span></td>
                                         </tr>
                                         <tr>
                                             <td style="font-size: 11px;
-                                            font-weight: 800; text-align: left;">Organik</td>
+                                            font-weight: 800; text-align: left;"><?php echo strlen($v->nama_produk ) > 15 ? substr($v->nama_produk ,0,15)."..." : $v->nama_produk ; ?></td>
                                             <td style="text-align: right;"><p style="font-weight: bold;
-                                                font-size: 8px;">Rp.69.000,-</p></td>
+                                                font-size: 8px;">Rp.<?php echo number_format($v->harga) ?>,-</p></td>
                                         </tr>
 
                                     </table>
-                                    <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
+                                    <a class="link-to" href="<?php echo base_url() ?>Home/detail_product/<?php echo $v->id_produk ?>"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
                                 </div>
                             </div>
-                            <div class="category-product-wrapper">
-                                <div class="image-product-category">
-                                    <img src="<?php echo base_url() ?>img/bibit-example.jpg"/>
-                                </div>
-                                <div class="product-category-overview">
-                                    <table style="width: 100%;">
-                                        <tr>
-                                            <td style="font-size: 9px;
-                                            text-align: left;
-                                            padding-top: 8px;">
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span></td>
-                                            <td style="text-align: right;"><span class="badge" style="font-size: 8px;background-color: #89BF43;">Kg</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="font-size: 11px;
-                                            font-weight: 800;text-align: left;">SP-36</td>
-                                            <td style="text-align: right;"><p style="font-weight: bold;
-                                                font-size: 8px;">Rp.69.000,-</p></td>
-                                        </tr>
-
-                                    </table>
-                                    <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
-                                </div>
-                            </div>
-                            <div class="category-product-wrapper">
-                                <div class="image-product-category">
-                                    <img src="<?php echo base_url() ?>img/bibit-example.jpg"/>
-                                </div>
-                                <div class="product-category-overview">
-                                    <table style="width: 100%;">
-                                        <tr>
-                                            <td style="font-size: 9px;
-                                            text-align: left;
-                                            padding-top: 8px;">
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span></td>
-                                            <td style="text-align: right;"><span class="badge" style="font-size: 8px;background-color: #89BF43;">Kg</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="font-size: 11px;
-                                            font-weight: 800;text-align: left;">SP-36</td>
-                                            <td style="text-align: right;"><p style="font-weight: bold;
-                                                font-size: 8px;">Rp.69.000,-</p></td>
-                                        </tr>
-
-                                    </table>
-                                    <a class="link-to"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
-                                </div>
-                            </div>
-                            
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="pills-category-UMKM" role="tabpanel" aria-labelledby="pills-categoryumkm-tab">
+                <div class="tab-pane fade" id="pills-category-pestisida" role="tabpanel" aria-labelledby="pills-categorypestisida-tab">
+                    <div class="row-fluid">
+                        <div class="category-product-slider">
+                            <?php
+                            foreach($listfiveproductspestisida as $v) {
+
+                            ?>
+                            <div class="category-product-wrapper">
+                                <div class="image-product-category">
+                                    <img src="<?php echo base_url() ?>img/pupuk-organik-5.jpg"/>
+                                </div>
+                                <div class="product-category-overview">
+                                    <table style="width: 100%;">
+                                        <tr>
+                                            <td style="font-size: 9px;
+                                            text-align: left;
+                                            padding-top: 8px;">
+                                                <span class="fa fa-star <?php echo $v->rating <= 1 ? '':'checked'; ?>"></span>
+                                                <span class="fa fa-star <?php echo $v->rating <= 2 ? '':'checked'; ?>"></span>
+                                                <span class="fa fa-star <?php echo $v->rating <= 3 ? '':'checked'; ?>"></span>
+                                                <span class="fa fa-star <?php echo $v->rating <= 4 ? '':'checked'; ?>"></span>
+                                                <span class="fa fa-star <?php echo $v->rating <= 5 ? '':'checked'; ?>"></span></td>
+                                            <td style="text-align: right;"><span class="badge" style="font-size: 8px;background-color: #89BF43;"><?php echo $v->jenis_satuan ?></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 11px;
+                                            font-weight: 800; text-align: left;"><?php echo strlen($v->nama_produk ) > 15 ? substr($v->nama_produk ,0,15)."..." : $v->nama_produk; ?></td>
+                                            <td style="text-align: right;"><p style="font-weight: bold;
+                                                font-size: 8px;">Rp.<?php echo number_format($v->harga) ?>,-</p></td>
+                                        </tr>
+
+                                    </table>
+                                    <a class="link-to" href="<?php echo base_url() ?>Home/detail_product/<?php echo $v->id_produk ?>"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
+                                </div>
+                            </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="pills-category-sembako" role="tabpanel" aria-labelledby="pills-categorysembako-tab">
                     <div style="height: 9.5em;
                     text-align: center;">
                         <p style="margin-top: 23%;
-                        transform: translateY(-50%);">Tidak ada</p>
+                        transform: translateY(-50%);">Sembako sedang kosong :(</p>
+
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-category-alattani" role="tabpanel" aria-labelledby="pills-categoryAlattani-tab">
+                    <div style="height: 9.5em;
+                    text-align: center;">
+                        <p style="margin-top: 23%;
+                        transform: translateY(-50%);">Alat Tani sedang kosong :(</p>
 
                     </div>
                 </div>

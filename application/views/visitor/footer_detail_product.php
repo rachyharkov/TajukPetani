@@ -3,7 +3,7 @@
     <div class="container-fluid footer" style="position: sticky; bottom: 0; background: white;">
       <div class="row">
         <div class="col-7" style="padding: 12px;">
-          <p style="margin: 0; font-size: 17px; font-weight: bold;">Rp.25.000,-</p>
+          <p style="margin: 0; font-size: 17px; font-weight: bold;">Rp.<?php echo $harga; ?>,-</p>
           <p style="font-size: 8px; margin: 0;">Harga untuk per-item nya</p>
         </div>
         <div class="col-5" style="padding: 12px;">

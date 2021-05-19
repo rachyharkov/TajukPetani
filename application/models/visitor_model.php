@@ -27,7 +27,7 @@ class Visitor_model extends CI_Model
         $this->db->select('detail_produk.*,kategori.*')
             ->from('detail_produk')
             ->join('kategori','kategori.id_kategori = detail_produk.id_kategori')
-            ->where('kategori.nama_kategori', $where)
+            ->where('kategori.id_kategori', $where)
             ->order_by('rating')
             ->limit(5);
         return $this->db->get()->result();
@@ -38,8 +38,13 @@ class Visitor_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
+        $this->db->select('detail_produk.*,kategori.*,user.*')
+        ->from('detail_produk')
+            ->join('kategori','kategori.id_kategori = detail_produk.id_kategori')
+            ->join('user','user.id_user = detail_produk.koperasi');
+        $this->db->where('detail_produk.id_produk', $id);
+        $query = $this->db->get();
+        return $query->row();
     }
     
     // get total rows

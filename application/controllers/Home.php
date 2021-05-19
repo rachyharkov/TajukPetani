@@ -29,7 +29,9 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('Pupuk');
+		$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
+		$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
+		$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
 		$data['title'] = 'Beranda - Tajuk Petani Web App';
 		$this->load->view('visitor/header',$data);
 		$this->load->view('visitor/index');
@@ -44,11 +46,37 @@ class Home extends CI_Controller {
 	}
 
 
-	public function detail_product()
+	public function detail_product($id)
 	{
-		$this->load->view('visitor/header');
-		$this->load->view('visitor/detail_product');
-		$this->load->view('visitor/footer_detail_product');
+		$row = $this->visitor_model->get_by_id($id);
+        if ($row) {
+            $data = array(
+            	'action' => site_url('career/submit_berkas'),
+				'id_produk' => $row->id_produk,
+				'stok' => $row->stok,
+				'nama_produk' => $row->nama_produk,
+				'min_pemesanan' => $row->min_pemesanan,
+				'kondisi' => $row->kondisi,
+				'rating' => $row->rating,
+				'nama_kategori' => $row->nama_kategori,
+				'varian' => $row->varian,
+				'berat' => $row->berat,
+				'jenis_satuan' => $row->jenis_satuan,
+				'jenis_bantuan' => $row->jenis_bantuan,
+				'deskripsi' => $row->deskripsi,
+				'harga' => $row->harga,
+				'nama_koperasi' => $row->nama_koperasi,
+				'alamat_koperasi' => $row->alamat_user,
+				'gambar' => $row->gambar,
+		    );
+			$this->load->view('visitor/header');
+			$this->load->view('visitor/detail_product', $data);
+			$this->load->view('visitor/footer_detail_product');
+		}else{
+			echo "No Data for ".$id;
+			echo $row->nama_koperasi;
+		}
+
 	}
 
 	public function pick_form()
