@@ -40,7 +40,9 @@ class Home extends CI_Controller {
 
 	public function home()
 	{
-		$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('Pupuk');
+		$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
+		$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
+		$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
 		$data['title'] = 'Beranda - Tajuk Petani Web App';
 		$this->load->view('visitor/index',$data);
 	}

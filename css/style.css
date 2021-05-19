@@ -460,6 +460,7 @@ a.link-button div img {
   border: none;
   font-size: 26px;
   padding: 0;
+  background-color: rgba(242, 238, 238, 1);
 }
 
 .bottom-nav .bottom-nav-wrapper p {
