@@ -7,6 +7,9 @@ class Verification extends CI_Controller
 	{
 		parent::__construct();		
 		$this->load->model('Auth_model');
+		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Methods: GET, OPTIONS, POST, GET, PUT");
+		header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
 	}
 
 	function index()

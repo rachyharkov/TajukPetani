@@ -20,7 +20,7 @@
                 font-size: 21px;
                 font-weight: 600;
                 line-height: 8vh;">Produk Koperasi</p>
-                <a class="link-to" href="#" style="font-size: 23px;
+                <a class="link-to" href="<?php echo base_url() ?>Koperasi/tambah_product" style="font-size: 23px;
                 color: #00000066;
                 margin: auto;
                 padding: 11px;"><i class="fas fa-plus"></i></a>

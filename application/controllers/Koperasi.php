@@ -31,6 +31,9 @@ class Koperasi extends CI_Controller {
         $this->load->model('tajukpetanimodel');
         $this->load->library('form_validation');        
 		$this->load->helper(array('form', 'url','text'));
+		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Methods: GET, OPTIONS, POST, GET, PUT");
+		header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
     }
 
 	public function index()
@@ -129,6 +132,11 @@ class Koperasi extends CI_Controller {
 		$data['title'] = 'Produk - Tajuk Petani Web App';
 		$this->load->view('koperasi/header',$data);
 		$this->load->view('koperasi/daftar_produk');
+	}
+
+	public function tambah_product() {
+		$this->load->view('koperasi/header');
+		$this->load->view('koperasi/tambah_produk');	
 	}
 
 	public function koperasi_menu()

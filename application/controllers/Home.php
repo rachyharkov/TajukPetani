@@ -27,9 +27,9 @@ class Home extends CI_Controller {
         $this->load->model('tajukpetanimodel');
         $this->load->library('form_validation');        
 		$this->load->helper(array('form', 'url','text'));
-		//header("Access-Control-Allow-Origin: *");
-		//header("Access-Control-Allow-Methods: GET, OPTIONS, POST, GET, PUT");
-		//header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Methods: GET, OPTIONS, POST, GET, PUT");
+		header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
     }
 
 	public function index()

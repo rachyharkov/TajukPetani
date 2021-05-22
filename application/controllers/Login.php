@@ -25,6 +25,9 @@ class Login extends CI_Controller {
         $this->load->model('visitor_model');
         $this->load->library('form_validation');        
 		$this->load->helper(array('form', 'url','text'));
+		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Methods: GET, OPTIONS, POST, GET, PUT");
+		header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
     }
 
 	public function index()
