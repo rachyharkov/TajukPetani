@@ -141,11 +141,7 @@
         var tbnotelp = $("#tbnotelp").val();
 
         if(tbnotelp.length == "") {
-          Swal.fire({
-            type: 'warning',
-            title: 'Oops...',
-            text: 'Username Wajib Diisi !'
-            });
+          $('.textwarning').html('<div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 12px; padding: 8px;">Isi nomor HP anda yang ter-registrasi pada sistem kami<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding: 1em;"></button></div>');
           } else {
             $('#btnloginbynotelf').html('<div class="spinner-border spinner-border-sm text-light" role="status"></div>');
             
@@ -171,11 +167,7 @@
                   console.log(data);
                 },
                 error:function(data){
-                Swal.fire({
-                  type: 'error',
-                  title: 'Opps!',
-                  text: 'server error!'
-                });
+                $('.textwarning').html('<div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 12px; padding: 8px;">Kesalahan terjadi, mohon coba lagi nanti<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding: 1em;"></button></div>');
                 console.log(data);
                 $('#btnloginbynotelf').html('Selanjutnya');
                 $('#btnloginbynotelf').removeAttr('disabled');
@@ -198,7 +190,7 @@
                 window.location.href = baseUrl + "petani/index";  
             } else if (data == "koperasi") {
               $("#loading").addClass("wait");
-              window.location.href = baseUrl + "koperasi/index";
+              window.location.href = baseUrl + "home/index";
             } else if(data == "admin") {
               Swal.fire({
                 type: 'error',

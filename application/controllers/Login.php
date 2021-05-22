@@ -29,6 +29,7 @@ class Login extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('login');
+		$data['title'] = 'Tajuk Petani Login';
+		$this->load->view('login',$data);
 	}
 }

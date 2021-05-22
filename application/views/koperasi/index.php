@@ -21,7 +21,7 @@
                           echo "Selamat Malam, ";
                         }
                         ?><?php echo $i->nama?>!</h4>
-                        <p style="font-size: 2vh;">Portal Tajuk Petani untuk <?php echo $i->role?></p>
+                        <p style="font-size: 2vh;">Portal Tajuk Petani <?php echo $i->role?></p>
                     </div>
                     <div class="col-3" style="text-align: right;">
                         <div class="wrapper-pp">

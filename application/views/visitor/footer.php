@@ -6,8 +6,8 @@
     <div class="bottom-nav">
       <div class="bottom-nav-wrapper">
         <button class="btn-nav active-bottom-nav" id="home">
-          <span class="iconify" data-inline="false" data-icon="fluent:home-16-regular" style="color: #00000030;display: block;"></span>
-          <span class="iconify" data-inline="false" data-icon="fluent:home-16-filled" style="color: #00000030;display: none;"></span>
+          <span class="iconify" data-inline="false" data-icon="fluent:home-16-regular" style="color: #00000030;display: none;"></span>
+          <span class="iconify" data-inline="false" data-icon="fluent:home-16-filled" style="color: #00000030;display: block;"></span>
           <p>Beranda</p>
         </button>
       </div>

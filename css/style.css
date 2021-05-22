@@ -448,6 +448,7 @@ a.link-button div img {
 .active-bottom-nav {
   pointer-events: none;
   color: #89BF43;
+  animation: popup 250ms ease-in-out;
 }
 
 .active-bottom-nav svg {
@@ -474,6 +475,114 @@ a.link-button div img {
 
 .bottom-nav .bottom-nav-wrapper svg {
   margin: auto;
+}
+
+@keyframes popup {
+  0%{ transform: scale(0); }
+  30%{ transform: scale(1.2); }
+  80%{ transform: scale(.9); }
+  100%{ transform: scale(1); }
+}
+
+.account-window {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1em;
+}
+
+.account-window > .account-window-wrapper {
+  width: 100%;
+  text-align: center;
+  padding: 14px;
+}
+
+.account-window > .account-window-wrapper > img.img-petani-phone {
+  animation: popup 1s ease-in-out;
+}
+
+.menu-nav-account-button {
+  width: 47%;
+  display: flex;
+  margin: 3px 0px;
+  flex-direction: column;
+  padding: 10px;
+  background: #eeeeee;
+  color: #606060;
+  align-items: center;
+  text-decoration: none;
+  transition: all 250ms ease-in-out;
+  border-radius: 7px;
+}
+
+.menu-nav-account-button > svg {
+  transform: scale(1);
+  transition: all 250ms ease-in-out;
+}
+
+.menu-nav-account-button:hover > svg, .menu-nav-account-button:focus > svg, .menu-nav-account-button:active > svg {
+  transform: scale(1.2);
+  transition: all 250ms ease-in-out;
+}
+
+.info-account-overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  margin-top: 3vh;
+  text-align: center;
+  border-radius: 7px;
+  padding: 12px 1px;
+  box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
+}
+
+.info-account-overview div:nth-child(2) {
+  position: relative;
+}
+
+.info-account-overview div:nth-child(2):before {
+  content: "";
+  background-color: #cfcfcf;
+  position: absolute;
+  width: 1px;
+  height: 45px;
+  top: 7px;
+  left: 0px;
+  display: block;
+}
+
+.info-account-overview div:nth-child(2):after {
+  content: "";
+  background-color: #cfcfcf;
+  position: absolute;
+  width: 1px;
+  height: 45px;
+  top: 7px;
+  right: 0px;
+  display: block;
+}
+
+.product-list-wrapper {
+  height: 7em;
+  display: grid;
+  grid-template-columns: 0.3fr 1fr;
+  grid-template-rows: 10vh auto;
+  margin-bottom: 30px;
+  position: relative;
+  padding: 0 2em;
+}
+
+.product-list-wrapper:after {
+  border-bottom: 7px solid #f2f2f2d4;
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  bottom: -19px;
+  margin: 0px 0;
 }
 
 @media only screen and (min-width: 768px) {

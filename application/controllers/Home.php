@@ -23,28 +23,64 @@ class Home extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('visitor_model');
+        $this->load->model('koperasi_model');
+        $this->load->model('tajukpetanimodel');
         $this->load->library('form_validation');        
 		$this->load->helper(array('form', 'url','text'));
+		//header("Access-Control-Allow-Origin: *");
+		//header("Access-Control-Allow-Methods: GET, OPTIONS, POST, GET, PUT");
+		//header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
     }
 
 	public function index()
 	{
-		$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
-		$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
-		$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
-		$data['title'] = 'Beranda - Tajuk Petani Web App';
-		$this->load->view('visitor/header',$data);
-		$this->load->view('visitor/index');
-		$this->load->view('visitor/footer');
+		if ($this->session->userdata('role') == 'koperasi') {
+			$iduser = $this->session->userdata('iduser'); //ambil data berdasarkan sessionuserdata
+			$where = array(
+				"id_user" => $iduser
+			);
+			$data['qinfo'] = $this->tajukpetanimodel->tampilinformasiakun('user',$where);
+			$data['title'] = 'Beranda - Tajuk Petani Web App';
+			$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
+			$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
+			$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
+			$data['title'] = 'Beranda - Tajuk Petani Web App';
+			$this->load->view('koperasi/header',$data);
+			$this->load->view('koperasi/index');
+			$this->load->view('koperasi/footer');
+		} else {
+			$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
+			$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
+			$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
+			$data['title'] = 'Beranda - Tajuk Petani Web App';
+			$this->load->view('visitor/header',$data);
+			$this->load->view('visitor/index');
+			$this->load->view('visitor/footer');
+		}
+
 	}
 
 	public function home()
 	{
-		$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
-		$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
-		$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
-		$data['title'] = 'Beranda - Tajuk Petani Web App';
-		$this->load->view('visitor/index',$data);
+		if ($this->session->userdata('role') == 'koperasi') {
+			$iduser = $this->session->userdata('iduser'); //ambil data berdasarkan sessionuserdata
+			$where = array(
+				"id_user" => $iduser
+			);
+			$data['qinfo'] = $this->tajukpetanimodel->tampilinformasiakun('user',$where);
+			$data['title'] = 'Beranda - Tajuk Petani Web App';
+			$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
+			$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
+			$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
+			$data['title'] = 'Beranda - Tajuk Petani Web App';
+			$this->load->view('koperasi/index',$data);
+		} else {
+			$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
+			$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
+			$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
+			$data['title'] = 'Beranda - Tajuk Petani Web App';
+			$this->load->view('visitor/index',$data);
+		}
 	}
 
 
@@ -90,7 +126,17 @@ class Home extends CI_Controller {
 
 	public function account_menu()
 	{
-		$this->load->view('visitor/account');
+		if ($this->session->userdata('role') == 'koperasi') {
+			$iduser = $this->session->userdata('iduser'); //ambil data berdasarkan sessionuserdata
+			$where = array(
+				"id_user" => $iduser
+			);
+			$data['qinfo'] = $this->tajukpetanimodel->tampilinformasiakun('user',$where);
+			$data['title'] = 'Akun Saya - Tajuk Petani Web App';
+			$this->load->view('koperasi/account', $data);
+		} else {
+			$this->load->view('visitor/account');
+		}
 	}
 
 	public function order_menu()
