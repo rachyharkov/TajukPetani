@@ -71,9 +71,32 @@
             <div class="textwarning" style="width: 100%;"></div>
             <label id="labellogin" class="form-label">No Telepon</label>
             <input type="number" class="form-control" id="tbnotelp" aria-describedby="notelpHelp" style="border: none;
-            border-radius: 65px;">
-            <input type="number" class="form-control" id="tbotp" aria-describedby="otpHelp" style="border: none;
-            border-radius: 65px; display: none;">
+            border-radius: 10px;">
+            
+            <div style="justify-content: space-evenly; display: none; flex-direction: row;" id="otp-container">
+              <input class="form-control" oninput="inputInsideOtpInput(this)" maxlength="1" type="number" style="border: none;
+            border-radius: 10px;width: 13%;">
+
+              <input class="form-control" oninput="inputInsideOtpInput(this)" maxlength="1" type="number" style="border: none;
+            border-radius: 10px;width: 13%;">
+
+              <input class="form-control" oninput="inputInsideOtpInput(this)" maxlength="1" type="number" style="border: none;
+            border-radius: 10px;width: 13%;">
+
+              <input class="form-control" oninput="inputInsideOtpInput(this)" maxlength="1" type="number" style="border: none;
+            border-radius: 10px;width: 13%;">
+
+              <input class="form-control" oninput="inputInsideOtpInput(this)" maxlength="1" type="number" style="border: none;
+            border-radius: 10px;width: 13%;">
+
+              <input class="form-control" oninput="inputInsideOtpInput(this)" maxlength="1" type="number" style="border: none;
+            border-radius: 10px;width: 13%;">
+            </div>
+
+            <!--<input type="number" class="form-control" id="tbotp" aria-describedby="otpHelp" style="border: none;
+            border-radius: 10px; display: none;">-->
+            
+
             <div id="texthelp" class="form-text" style="color: #e0e0e0;">Contoh: 081234567890</div>
             <p><a href="Lupa login anda?"></a></p>
             <button class="btn btn-success" id="btnloginbynotelf" style="width: 100%;
@@ -113,6 +136,67 @@
 
     var baseUrl = "<?= base_url();?>";
     var siteUrl = "<?= site_url();?>";
+
+    function inputInsideOtpInput(el) {
+      if (el.value.length > 1){
+          el.value = el.value[el.value.length - 1];
+      }
+      try {
+          if(el.value == null || el.value == ""){
+              this.focusonInput(el.previousElementSibling);
+          }else {
+              this.focusonInput(el.nextElementSibling);
+          }
+      }catch (e) {
+          console.log('init!');
+          initLogin();
+      }
+    }
+
+    function focusonInput(ele){
+      ele.focus();
+      let val = ele.value;
+      ele.value = "";
+      // ele.value = val;
+      setTimeout(()=>{
+         ele.value = val;
+      })
+    }
+
+    function initLogin() {
+      var tbnotelp = $("#tbnotelp").val();
+      var tbotp = '';
+      
+      $("#otp-container input").each(function(){
+        tbotp += $(this).val();
+      });
+
+      console.log(tbotp);
+
+      $.ajax({
+        url:  baseUrl + "verification/checkpassword",
+        type: "POST",
+        data: {'<?php echo $this->security->get_csrf_token_name(); ?>':'<?php echo $this->security->get_csrf_hash(); ?>',tbnotelp:tbnotelp,tbotp:tbotp},
+        success:function(data){
+          if(data == "petani"){
+              $("#loading").addClass("wait");
+              window.location.href = baseUrl + "petani/index";  
+          } else if (data == "koperasi") {
+            $("#loading").addClass("wait");
+            window.location.href = baseUrl + "home/index";
+          } else if(data == "admin") {
+            Swal.fire({
+              type: 'error',
+              title: 'Login Gagal!',
+              text: 'Ngapain njir!'
+            });
+          } else {
+            $('.textwarning').html('<div class="alert alert-danger alert-once alert-dismissible fade show" role="alert" style="font-size: 12px; padding: 8px;">Kode OTP salah, mohon cek kembali<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding: 1em;"></button></div>');
+          }
+          console.log(data);
+        }
+      })
+    }
 
     $(window).on('load',function() {
       $("#loading").removeClass("wait");
@@ -157,7 +241,7 @@
                     $('#texthelp').html('');
                     $('.textwarning').html('<div class="alert alert-success alert-dismissible fade show" role="alert" style="font-size: 12px; padding: 8px;">Masukan kode OTP yang dikirim melalui SMS<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding: 1em;"></button></div>');
                     $('#tbnotelp').css('display','none');
-                    $('#tbotp').css('display','block');
+                    $('#otp-container').css('display','flex');
                     $('#btnreallogin').css('display','block');
                   } else {
                     $('.textwarning').html('<div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 12px; padding: 8px;">Nomor Telefon tidak terdaftar di sistem kami<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding: 1em;"></button></div>');
@@ -177,32 +261,7 @@
       });
 
       $("#btnreallogin").click(function(){
-        var tbnotelp = $("#tbnotelp").val();
-        var tbotp = $("#tbotp").val();
         
-        $.ajax({
-          url:  baseUrl + "verification/checkpassword",
-          type: "POST",
-          data: {'<?php echo $this->security->get_csrf_token_name(); ?>':'<?php echo $this->security->get_csrf_hash(); ?>',tbnotelp:tbnotelp,tbotp:tbotp},
-          success:function(data){
-          	if(data == "petani"){
-                $("#loading").addClass("wait");
-                window.location.href = baseUrl + "petani/index";  
-            } else if (data == "koperasi") {
-              $("#loading").addClass("wait");
-              window.location.href = baseUrl + "home/index";
-            } else if(data == "admin") {
-              Swal.fire({
-                type: 'error',
-                title: 'Login Gagal!',
-                text: 'Ngapain njir!'
-              });
-            } else {
-              $('.textwarning').html('<div class="alert alert-danger alert-once alert-dismissible fade show" role="alert" style="font-size: 12px; padding: 8px;">Kode OTP salah, mohon cek kembali<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding: 1em;"></button></div>');
-            }
-            console.log(data);
-            }
-          })
       });
       
     })

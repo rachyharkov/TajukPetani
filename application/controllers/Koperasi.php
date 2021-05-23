@@ -125,6 +125,7 @@ class Koperasi extends CI_Controller {
 		$this->load->view('koperasi/order');
 	}
 
+
 	public function koperasi_products() {
 		
 		$iduser = $this->session->userdata('iduser'); //ambil data berdasarkan sessionuserdata
@@ -135,12 +136,126 @@ class Koperasi extends CI_Controller {
 	}
 
 	public function tambah_product() {
-		$this->load->view('koperasi/header');
+
+		$data['kategori'] = $this->koperasi_model->tampilallkategori();
+		$data['title'] = 'Tambah Produk - Tajuk Petani Web App';
+		$this->load->view('koperasi/header', $data);
 		$this->load->view('koperasi/tambah_produk');	
+	}
+
+	function insert_product_operation() {
+		$id_produk = $this->koperasi_model->generateNewDataNilai();
+		$namaproduk = trim($this->input->post('tbnamaproduk'));
+        $stok = trim($this->input->post('tbstok'));
+        $minpemesanan = trim($this->input->post('tbminpemesanan'));
+        $kondisi = trim($this->input->post('tbkondisi'));
+        $rating = 5;
+        $kategori = trim($this->input->post('tbkategori'));
+        $varian = trim($this->input->post('tbvarian'));
+        $berat = trim($this->input->post('tbberatnumber'));
+        $jenissatuan = trim($this->input->post('tbjenissatuan'));
+        $jenisbantuan = trim($this->input->post('tbjenisbantuan'));
+        $deskripsi = trim($this->input->post('tbdeskripsi'));
+        $harga = trim($this->input->post('tbharga'));
+        $koperasi = trim($this->input->post('koperasi'));
+        $jumlahgambar = $this->input->post('jumlahfile');
+
+        $idprodukbaru = $this->koperasi_model->generateNewDataNilai();
+
+        $arraygambar = array();
+
+		// for example
+		for ($i = 0; $i < $jumlahgambar; ++$i) {
+		    $arraygambar[] = 'img'.$i.'product'.$idprodukbaru;
+		}
+
+		$gambarlist = join(";",$arraygambar);
+
+        $data = array(
+        			'id_produk' => $id_produk,
+                    'stok' => $stok,
+                    'nama_produk' => $namaproduk,
+                    'min_pemesanan' => $minpemesanan,
+                    'kondisi' => $kondisi,
+                    'rating' => $rating,
+                    'id_kategori' => $kategori,
+                    'varian' => $varian,
+                    'berat' => $berat,
+                    'jenis_satuan' => $jenissatuan,
+                    'jenis_bantuan' => $jenisbantuan,
+                    'deskripsi' => $deskripsi,
+                    'harga' => $harga,
+                    'koperasi' => $koperasi,
+                    'gambar' => $gambarlist
+                ); 
+
+
+        print_r($data);
+      	/*$this->db->insert('contact',$data);   
+      	$res['msg']="successfull";
+      	//no need to set flash session in CI for ajax
+        //$this->session->set_flashdata('flashSuccess', 'successfull');
+         //set page header as json format
+        $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode($res));*/
+	}
+
+	public function uploadGambarProduk()
+	{
+	    $this->load->library('upload');//loading the library
+	    $imagePath = realpath(APPPATH . '../image-data/koperasi');//this is your real path APPPATH means you are at the application folder
+	    $number_of_files_uploaded = count($_FILES['files']['name']);
+
+	    $idprodukbaru = $this->koperasi_model->generateNewDataNilai();
+
+	    if ($number_of_files_uploaded > 5){ // checking how many images your user/client can upload
+	        $productImages['return'] = false;
+	        $productImages['message'] = "You can upload 5 Images";
+	        echo json_encode($productImages);
+	    }
+	    else{
+	        for ($i = 0; $i <  $number_of_files_uploaded; $i++) {
+	            $_FILES['userfile']['name']     = $_FILES['files']['name'][$i];
+	            $_FILES['userfile']['type']     = $_FILES['files']['type'][$i];
+	            $_FILES['userfile']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+	            $_FILES['userfile']['error']    = $_FILES['files']['error'][$i];
+	            $_FILES['userfile']['size']     = $_FILES['files']['size'][$i];
+	            //configuration for upload your images
+	            $config = array(
+	                'file_name'     => 'img'.$i.'product'.$idprodukbaru,
+	                'allowed_types' => 'jpg|jpeg|png|gif',
+	                'max_size'      => 3000,
+	                'overwrite'     => FALSE,
+	                'upload_path'
+	                =>$imagePath
+	            );
+	            $this->upload->initialize($config);
+	            $errCount = 0;//counting errrs
+	            if (!$this->upload->do_upload())
+	            {
+	                $error = array('error' => $this->upload->display_errors());
+	                $productImages[] = array(
+	                    'errors'=> $error
+	                );//saving arrors in the array
+	            }
+	            else
+	            {
+	                $filename = $this->upload->data();
+	                $productImages[] = array(
+	                    'fileName'=>$filename['file_name'],
+	                );
+	            }//if file uploaded
+	            
+	        }//for loop ends here
+	        echo json_encode($productImages);//sending the data to the jquery/ajax or you can save the files name inside your database.
+	    }//else
+
 	}
 
 	public function koperasi_menu()
 	{
 		$this->load->view('koperasi/koperasi');
 	}
+
 }
