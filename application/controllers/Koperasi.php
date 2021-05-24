@@ -144,7 +144,7 @@ class Koperasi extends CI_Controller {
 	}
 
 	function insert_product_operation() {
-		$id_produk = $this->koperasi_model->generateNewDataNilai();
+		$id_produk = $this->koperasi_model->generateIdProduk();
 		$namaproduk = trim($this->input->post('tbnamaproduk'));
         $stok = trim($this->input->post('tbstok'));
         $minpemesanan = trim($this->input->post('tbminpemesanan'));
@@ -157,16 +157,17 @@ class Koperasi extends CI_Controller {
         $jenisbantuan = trim($this->input->post('tbjenisbantuan'));
         $deskripsi = trim($this->input->post('tbdeskripsi'));
         $harga = trim($this->input->post('tbharga'));
-        $koperasi = trim($this->input->post('koperasi'));
+        $koperasi = $this->session->userdata('iduser');
         $jumlahgambar = $this->input->post('jumlahfile');
+        $filestype = $this->input->post('filestype'); //dapetin tipe file
 
-        $idprodukbaru = $this->koperasi_model->generateNewDataNilai();
+        $idprodukbaru = $this->koperasi_model->generateIdProduk();
 
         $arraygambar = array();
 
 		// for example
 		for ($i = 0; $i < $jumlahgambar; ++$i) {
-		    $arraygambar[] = 'img'.$i.'product'.$idprodukbaru;
+		    $arraygambar[] = 'img'.$i.'product'.$idprodukbaru.'.'.$filestype[$i]; //susun disini dech
 		}
 
 		$gambarlist = join(";",$arraygambar);
@@ -190,15 +191,16 @@ class Koperasi extends CI_Controller {
                 ); 
 
 
-        print_r($data);
-      	/*$this->db->insert('contact',$data);   
+        //print_r($data);
+        //print_r($filestype);
+      	$this->koperasi_model->lakukan_insert('detail_produk',$data);   
       	$res['msg']="successfull";
       	//no need to set flash session in CI for ajax
         //$this->session->set_flashdata('flashSuccess', 'successfull');
          //set page header as json format
-        $this->output
-        ->set_content_type('application/json')
-        ->set_output(json_encode($res));*/
+        //$this->output->set_content_type('application/json')
+        //->set_output(json_encode($res));*/
+        $this->tambah_product();
 	}
 
 	public function uploadGambarProduk()
@@ -207,7 +209,7 @@ class Koperasi extends CI_Controller {
 	    $imagePath = realpath(APPPATH . '../image-data/koperasi');//this is your real path APPPATH means you are at the application folder
 	    $number_of_files_uploaded = count($_FILES['files']['name']);
 
-	    $idprodukbaru = $this->koperasi_model->generateNewDataNilai();
+	    $idprodukbaru = $this->koperasi_model->generateIdProdukforgambar();
 
 	    if ($number_of_files_uploaded > 5){ // checking how many images your user/client can upload
 	        $productImages['return'] = false;
@@ -250,6 +252,56 @@ class Koperasi extends CI_Controller {
 	        }//for loop ends here
 	        echo json_encode($productImages);//sending the data to the jquery/ajax or you can save the files name inside your database.
 	    }//else
+
+	}
+
+	public function delete_produk($id) 
+    {
+        $row = $this->koperasi_model->get_by_id($id);
+
+        if ($row) {
+        	$gambarlist = explode(';', $row->gambar);
+        	foreach ($gambarlist as $v) {
+        		unlink("image-data/koperasi/".$v);
+        	}
+            $this->koperasi_model->lakukan_delete('id_produk', $id);
+            $this->koperasi_products();
+        } else {
+            $this->session->set_flashdata('message', 'Record Not Found');
+            //redirect(site_url('career_posts'));
+        }
+    }
+
+    public function edit_product($id)
+	{
+		$row = $this->visitor_model->get_by_id($id);
+        if ($row) {
+            $data = array(
+            	'action' => site_url('career/submit_berkas'),
+				'id_produk' => $row->id_produk,
+				'stok' => $row->stok,
+				'nama_produk' => $row->nama_produk,
+				'min_pemesanan' => $row->min_pemesanan,
+				'kondisi' => $row->kondisi,
+				'nama_kategori' => $row->id_kategori,
+				'varian' => $row->varian,
+				'berat' => $row->berat,
+				'jenis_satuan' => $row->jenis_satuan,
+				'jenis_bantuan' => $row->jenis_bantuan,
+				'deskripsi' => $row->deskripsi,
+				'harga' => $row->harga,
+				'nama_koperasi' => $row->nama_koperasi,
+				'alamat_koperasi' => $row->alamat_user,
+				'gambar' => $row->gambar,
+		    );
+		    $data['kategori'] = $this->koperasi_model->tampilallkategori();
+			$data['title'] = 'Tambah Produk - Tajuk Petani Web App';
+			$this->load->view('koperasi/header', $data);
+			$this->load->view('koperasi/edit_produk');	
+		}else{
+			echo "No Data for ".$id;
+			echo $row->nama_koperasi;
+		}
 
 	}
 

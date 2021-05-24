@@ -20,7 +20,7 @@
                 <p id="texttitlewindow" style="margin: 3px 0;
                 font-size: 21px;
                 font-weight: 600;
-                line-height: 8vh;">Tambah Produk</p>
+                line-height: 8vh;">Edit Produk</p>
             </div>
         </div>
         <form action="" method="POST" enctype="multipart/form-data">
@@ -44,15 +44,35 @@
                                 height: 24px;
                                 z-index: -1;"></i>
                         </div>
+                        <?php
+                        $gambarlist = explode(';', $gambar);
+                        $i = 0;
+                        foreach ($gambarlist as $e) {
+                        	?>
+                        	<div class="image-collection" id="imgcollection<?php echo $i ?>">
+			                    <img id="img<?php echo $i ?>" name="img<?php echo $i ?>" style="height: 100%; width: 100%; object-fit: cover;transform: scale(1.5);" src="<?php echo base_url() ?>image-data/koperasi/<?php echo $e ?>">
+			                    <button onclick="document.getElementById('imgcollection<?php echo $i ?>').remove()" style="position: absolute;
+			                        top: 0;
+			                        right: 0;
+			                        font-size: 11px;
+			                        background-color: #d64141;
+			                        border: none;
+			                        color: white;
+			                        border-radius: 50%;">x</button>
+			                </div>
+                        	<?php
+			                $i++;
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="group">
-                    <input autocomplete="off" class="tbinputcustom" type="text" id="tbnamaproduk" name="tbnamaproduk" required="required"/>
+                    <input autocomplete="off" class="tbinputcustom" value="<?php echo $nama_produk ?>" type="text" id="tbnamaproduk" name="tbnamaproduk" required="required"/>
                     <label class="labelinputcustom" for="tbnamaproduk">Nama Produk</label>
                     <div class="bar"></div>
                 </div>
                 <div class="group">
-                    <input autocomplete="off" class="tbinputcustom tbinputharga" type="text" id="tbhargaproduk" name="tbhargaproduk" required="required" style="padding-left: 26px;" />
+                    <input autocomplete="off" class="tbinputcustom tbinputharga" type="text" id="tbhargaproduk" name="tbhargaproduk" required="required" style="padding-left: 26px;" value="<?php echo $harga ?>" />
                     <label class="labelinputcustom labelhargainput" for="tbhargaproduk" style="left: 26px;">Harga</label>
                     <p style="position: absolute;top: 19px;">Rp</p>
                     <div class="bar"></div>
@@ -64,9 +84,8 @@
                         <?php 
                         foreach ($kategori as $e) {
                             ?>
-                                <input name="pilihanKategori" type="radio" id="<?php echo $e->nama_kategori.'option' ?>" class="hide" value="<?php echo $e->id_kategori?>">
-                                <label for="<?php echo $e->nama_kategori.'option' ?>"><?php echo $e->nama_kategori?></label>
-
+                                <input name="pilihanKategori" type="radio" id="<?php echo $e->nama_kategori.'option' ?>" class="hide" value="<?php echo $e->id_kategori?>" <?php echo ($nama_kategori == $e->id_kategori ? 'checked' : ''); ?>>
+                                <label for="<?php echo $e->nama_kategori.'option' ?>"><?php echo $e->nama_kategori ?></label>
                             <?php
                         }
 
@@ -77,7 +96,7 @@
     display: grid;
     grid-template-columns: 1fr 0.6fr 5px 0.6fr;">
                     <div class="group">
-                        <input autocomplete="off" class="tbinputcustom" type="text" id="tbValueberat" name="tbValueberat" required="required"/>
+                        <input autocomplete="off" class="tbinputcustom" value="" type="text" id="tbValueberat" name="tbValueberat" required="required"/>
                         <label class="labelinputcustom" for="tbValueberat">Nilai berat</label>
                         <div class="bar"></div>
                     </div>
@@ -95,12 +114,12 @@
                     </select>
                 </div>
                 <div class="group">
-                    <input autocomplete="off" class="tbinputcustom" type="text" id="tbstok" name="tbstok" required="required"/>
+                    <input autocomplete="off" class="tbinputcustom" value="" type="text" id="tbstok" name="tbstok" required="required"/>
                     <label class="labelinputcustom" for="tbstok">Stok</label>
                     <div class="bar"></div>
                 </div>
                 <div class="group">
-                    <input autocomplete="off" class="tbinputcustom" type="text" id="tbminpemesanan" name="tbminpemesanan" required="required"/>
+                    <input autocomplete="off" class="tbinputcustom" value="" type="text" id="tbminpemesanan" name="tbminpemesanan" required="required"/>
                     <label class="labelinputcustom" for="tbminpemesanan">Min. Pemesanan</label>
                     <div class="bar"></div>
                 </div>
@@ -121,7 +140,7 @@
                     </div>
                 </div>
                 <div class="group">
-                    <input autocomplete="off" class="tbinputcustom" type="text" id="tbvarian" name="tbvarian" required="required"/>
+                    <input autocomplete="off" class="tbinputcustom" value="" type="text" id="tbvarian" name="tbvarian" required="required"/>
                     <label class="labelinputcustom" for="tbvarian">Varian</label>
                     <div class="bar"></div>
                 </div>
@@ -227,7 +246,7 @@
         } else {
             $("div#indicatordescription").empty().append('<i class="fas fa-check-circle" style="color: #82c91e;margin: auto;"></i>');
         }
-        $("#texttitlewindow").text('Tambah Produk');
+        $("#texttitlewindow").text('Edit Produk');
         $("#description-window").css('display','none');
     });
 
