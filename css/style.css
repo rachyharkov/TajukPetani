@@ -145,17 +145,6 @@ a {
   background-color: #8fbe00;
 }
 
-div.category-button-slide ul li button {
-  color: black;
-  border-radius: 45px;
-  box-shadow: 0px 0px 0px 0px;
-  margin: 0;
-  transition: all 200ms ease-in-out;
-  position: unset;
-  top: 0;
-  padding-top: 10px;
-}
-
 div.category-button-slide ul {
   white-space: nowrap !important;
   overflow-x: auto;
@@ -177,12 +166,25 @@ div.category-button-slide > ul > li:last-child {
       margin-right: 13px;
 }
 
+div.category-button-slide ul li button {
+  color: black;
+  border-radius: 12px;
+  box-shadow: 0px 0px 0px 0px;
+  margin: 0;
+  transition: all 200ms ease-in-out;
+  position: unset;
+  top: 0;
+  padding-top: 10px;
+  background-color: #f1f1f1;
+}
+
 div.category-button-slide ul li button.active {
   transition: all 200ms ease-in-out;
   box-shadow: 0px 3px 3px 0px rgb(0 0 0 / 75%);
   position: relative;
   top: -4px;
   background-color: #89bf43;
+  color: #fff;
 }
 
 .category-product-slider {
@@ -219,6 +221,7 @@ div.category-button-slide ul li button.active {
 }
 
 .weather-card-slider {
+  display: flex;
   font-size: 14px;
   height: 160px;
   white-space: nowrap;
@@ -304,7 +307,7 @@ div.category-button-slide ul li button.active {
   margin-bottom: 0;
 }
 
-.product-category-overview a.link-to {
+.product-category-overview a.link-to, .product-category-overview button.btnpesannow {
   border: none;
   background: #89bf43;
   border-radius: 6px;
@@ -480,7 +483,6 @@ a.link-button div img {
 }
 
 .account-window {
-  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -839,6 +841,84 @@ div.product-option-element > div > div:nth-child(2) > a {
 div.product-option-element > div > div:nth-child(3) > button {
   color: #dc3545;
 }
+
+.form-pick-container {
+  background: rgb(246 246 246);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  display: grid;
+  grid-template-columns: 0.1fr 1fr 5em;
+  grid-template-rows: repeat(6,auto);
+  padding-top: 4vh;
+}
+
+input.inputRadio[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+label.labelRadio {
+  color: rgba(137, 191, 67, 1);
+  display: inline-block;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 5px 20px;
+  transition: all 250ms ease-in-out;
+  font-size: 14px;
+}
+
+input.inputRadio[type=radio]:checked + label.labelRadio {
+  box-shadow: -2px 2px 2px rgb(0 0 0 / 25%);
+  color: white;
+  background: #89bf43;
+  transition: all 250ms ease-in-out;
+}
+
+label.labelRadio + input.inputRadio[type=radio] + label.labelRadio {
+  border-left: solid 3px #675f6b;
+}
+
+.radio-group {
+  display: inline-block;
+  margin: 7px 3px;
+  border-radius: 6px;
+  background-color: rgba(255,255,255,1);
+  overflow: hidden;
+}
+
+.confirmation-element {
+  height: 100%;
+  position: fixed;
+  bottom: -100%;
+  background: #71aa29;
+  z-index: 99;
+  width: 100%;
+  border-top-left-radius: 29px;
+  border-top-right-radius: 29px;
+  padding: 28px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  transition: all 250ms cubic-bezier(0.65, 0.05, 0.36, 1);
+  overflow: auto;
+}
+
+.p-value {
+  margin: 0;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.08em;
+}
+
+.p-title {
+  margin: 0;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  color: #89BF43;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 @media only screen and (min-width: 768px) {
   /* For desktop: */

@@ -57,4 +57,42 @@ class Petani extends CI_Controller {
 		$this->load->view('visitor/pick_form');
 		$this->load->view('visitor/footer_pickform');
 	}
+
+	public function insert_pesanan()
+	{
+
+		$iduser = trim($this->input->post('iduser'));
+        $idproduk = trim($this->input->post('idproduk'));
+        $jumbel = trim($this->input->post('jumbel'));
+        $tanggalpengambilan = trim($this->input->post('tanggalpengambilan'));
+        $bataspengambilan = trim($this->input->post('bataspengambilan'));
+        $jamambil = trim($this->input->post('jamambil'));
+        $totalharga = trim($this->input->post('totalharga'));
+        $metodebayar = trim($this->input->post('metodebayar'));
+        $catatan = trim($this->input->post('catatan'));
+        
+        $data = array(
+        			'id_user' => $iduser,
+                    'id_produk' => $idproduk,
+                    'jumbel' => $jumbel,
+                    'tanggal_pengambilan' => $tanggalpengambilan,
+                    'batas_pengambilan' => $bataspengambilan,
+                    'jam_ambil' => $jamambil,
+                    'total_harga' => $totalharga,
+                    'metode_bayar' => $metodebayar,
+                    'catatan' => $catatan
+                ); 
+
+
+        //print_r($data);
+        //print_r($filestype);
+      	$this->tajukpetanimodel->lakukan_insert('pesanan',$data);   
+      	$res['msg']="successfull";
+      	//no need to set flash session in CI for ajax
+        //$this->session->set_flashdata('flashSuccess', 'successfull');
+         //set page header as json format
+        //$this->output->set_content_type('application/json')
+        //->set_output(json_encode($res));*/
+        $this->tambah_product();
+	}
 }

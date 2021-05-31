@@ -21,7 +21,7 @@
                           echo "Selamat Malam, ";
                         }
                         ?><?php echo $i->nama?>!</h4>
-                        <p style="font-size: 2vh;">Portal Tajuk Petani <?php echo $i->role?></p>
+                        <p style="font-size: 2vh;">Portal <?php echo $i->role?></p>
                     </div>
                     <div class="col-3" style="text-align: right;">
                         <div class="wrapper-pp">
@@ -103,6 +103,7 @@
                             echo "hujan";
                         }
                     ?>">
+                    <div style="display: flex; flex-direction: column; justify-content: space-evenly; height: 100%;">
                         <div style="display: grid; grid-template-columns: 0.5fr 1fr;">
                             <div style="grid-row-start: 1;
                             grid-row-end: 3;">
@@ -112,6 +113,7 @@
                                 <img src="<?php echo base_url() ?>img/logo-cerah.svg">
                             <?php
                             } elseif($id < 3) {
+
                                 ?>
                                 <img src="<?php echo base_url() ?>img/logo-cerah-berawan.svg">
                             <?php
@@ -140,8 +142,7 @@
                                 ?></p>
                                 
                             </div>
-                            <div style="text-align: center; font-weight: 600;
-                            margin-bottom: 18px;">
+                            <div style="text-align: center; font-weight: 600;">
                                 <p style="margin: 0;">28 / 22°C</p>
                                 <p style="margin: 0;
                                 font-size: 9px;
@@ -150,8 +151,7 @@
                                 margin-top: -3px;">MAX &nbsp;&nbsp; MIN</p>
                             </div>
                         </div>
-                        <table style="width: 100%; font-size: 8px;position: absolute;
-    bottom: 6px;">
+                        <table style="width: 100%; font-size: 8px;">
                             <tr>
                                 <th colspan="2"><?php echo $a->name[1]; ?></th>
                             </tr>
@@ -165,6 +165,7 @@
                             </tr>
                         </table>
                     </div>
+                </div>
                     <?php 
                     $i++;
                 endforeach ?>

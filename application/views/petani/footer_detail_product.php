@@ -7,7 +7,7 @@
           <p style="font-size: 8px; margin: 0;">Harga untuk per-item nya</p>
         </div>
         <div class="col-5" style="padding: 12px;">
-          <a href="<?php echo base_url() ?>Home/pick_form/<?php echo $id_produk?>" class="btn btn-success link-to" style="background: #89BF43; border: none;">Ambil Barang</a>
+          <a href="<?php echo base_url() ?>Home/pick_form" class="btn btn-success link-to" style="background: #89BF43;">Ambil Barang</a>
         </div>    
       </div>
     </div>

@@ -3,6 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+
 class Visitor_model extends CI_Model
 {
 
@@ -10,7 +11,7 @@ class Visitor_model extends CI_Model
     public $id = 'id_dept';
     public $order = 'DESC';
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }

@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Home extends CI_Controller {
 
 	/**
@@ -26,7 +25,7 @@ class Home extends CI_Controller {
         $this->load->model('koperasi_model');
         $this->load->model('tajukpetanimodel');
         $this->load->library('form_validation');        
-		$this->load->helper(array('form', 'url','text'));
+		$this->load->helper(array('form', 'url','text','date_local'));
 		header("Access-Control-Allow-Origin: *");
 		header("Access-Control-Allow-Methods: GET, OPTIONS, POST, GET, PUT");
 		header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
@@ -48,6 +47,20 @@ class Home extends CI_Controller {
 			$this->load->view('koperasi/header',$data);
 			$this->load->view('koperasi/index');
 			$this->load->view('koperasi/footer');
+		} else if ($this->session->userdata('role') == 'petani') {
+			$iduser = $this->session->userdata('iduser'); //ambil data berdasarkan sessionuserdata
+			$where = array(
+				"id_user" => $iduser
+			);
+			$data['qinfo'] = $this->tajukpetanimodel->tampilinformasiakun('user',$where);
+			$data['title'] = 'Beranda - Tajuk Petani Web App';
+			$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
+			$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
+			$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
+			$data['title'] = 'Beranda - Tajuk Petani Web App';
+			$this->load->view('petani/header',$data);
+			$this->load->view('petani/index');
+			$this->load->view('petani/footer');
 		} else {
 			$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
 			$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
@@ -74,6 +87,18 @@ class Home extends CI_Controller {
 			$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
 			$data['title'] = 'Beranda - Tajuk Petani Web App';
 			$this->load->view('koperasi/index',$data);
+		} else if ($this->session->userdata('role') == 'petani') {
+			$iduser = $this->session->userdata('iduser'); //ambil data berdasarkan sessionuserdata
+			$where = array(
+				"id_user" => $iduser
+			);
+			$data['qinfo'] = $this->tajukpetanimodel->tampilinformasiakun('user',$where);
+			$data['title'] = 'Beranda - Tajuk Petani Web App';
+			$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
+			$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
+			$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
+			$data['title'] = 'Beranda - Tajuk Petani Web App';
+			$this->load->view('petani/index',$data);
 		} else {
 			$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
 			$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
@@ -117,11 +142,42 @@ class Home extends CI_Controller {
 
 	}
 
-	public function pick_form()
+	public function pick_form($id)
 	{
-		$this->load->view('visitor/header');
-		$this->load->view('visitor/pick_form');
-		$this->load->view('visitor/footer_pickform');
+		$row = $this->visitor_model->get_by_id($id);
+        if ($row) {
+            $data = array(
+            	'action' => site_url('career/submit_berkas'),
+				'id_produk' => $row->id_produk,
+				'stok' => $row->stok,
+				'nama_produk' => $row->nama_produk,
+				'min_pemesanan' => $row->min_pemesanan,
+				'kondisi' => $row->kondisi,
+				'rating' => $row->rating,
+				'nama_kategori' => $row->nama_kategori,
+				'varian' => $row->varian,
+				'berat' => $row->berat,
+				'jenis_satuan' => $row->jenis_satuan,
+				'jenis_bantuan' => $row->jenis_bantuan,
+				'deskripsi' => $row->deskripsi,
+				'harga' => $row->harga,
+				'nama_koperasi' => $row->nama_koperasi,
+				'alamat_koperasi' => $row->alamat_user,
+				'gambar' => $row->gambar,
+		    );
+
+		    $iduser = $this->session->userdata('iduser'); //ambil data berdasarkan sessionuserdata
+			$where = array(
+				"id_user" => $iduser
+			);
+			$data['qinfo'] = $this->tajukpetanimodel->tampilinformasiakun('user',$where);
+			$this->load->view('visitor/header');
+			$this->load->view('visitor/pick_form',$data);
+		}else{
+			echo "No Data for ".$id;
+			echo $row->nama_koperasi;
+		}
+		
 	}
 
 	public function account_menu()
@@ -134,6 +190,14 @@ class Home extends CI_Controller {
 			$data['qinfo'] = $this->tajukpetanimodel->tampilinformasiakun('user',$where);
 			$data['title'] = 'Akun Saya - Tajuk Petani Web App';
 			$this->load->view('koperasi/account', $data);
+		} else if ($this->session->userdata('role') == 'petani') {
+			$iduser = $this->session->userdata('iduser'); //ambil data berdasarkan sessionuserdata
+			$where = array(
+				"id_user" => $iduser
+			);
+			$data['qinfo'] = $this->tajukpetanimodel->tampilinformasiakun('user',$where);
+			$data['title'] = 'Akun Saya - Tajuk Petani Web App';
+			$this->load->view('petani/account', $data);
 		} else {
 			$this->load->view('visitor/account');
 		}

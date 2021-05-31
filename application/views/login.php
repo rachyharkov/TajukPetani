@@ -180,7 +180,7 @@
         success:function(data){
           if(data == "petani"){
               $("#loading").addClass("wait");
-              window.location.href = baseUrl + "petani/index";  
+              window.location.href = baseUrl + "home/index";  
           } else if (data == "koperasi") {
             $("#loading").addClass("wait");
             window.location.href = baseUrl + "home/index";

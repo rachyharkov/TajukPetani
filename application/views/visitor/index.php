@@ -97,6 +97,7 @@
                             echo "hujan";
                         }
                     ?>">
+                    <div style="display: flex; flex-direction: column; justify-content: space-evenly; height: 100%;">
                         <div style="display: grid; grid-template-columns: 0.5fr 1fr;">
                             <div style="grid-row-start: 1;
                             grid-row-end: 3;">
@@ -106,6 +107,7 @@
                                 <img src="<?php echo base_url() ?>img/logo-cerah.svg">
                             <?php
                             } elseif($id < 3) {
+
                                 ?>
                                 <img src="<?php echo base_url() ?>img/logo-cerah-berawan.svg">
                             <?php
@@ -134,8 +136,7 @@
                                 ?></p>
                                 
                             </div>
-                            <div style="text-align: center; font-weight: 600;
-                            margin-bottom: 18px;">
+                            <div style="text-align: center; font-weight: 600;">
                                 <p style="margin: 0;">28 / 22°C</p>
                                 <p style="margin: 0;
                                 font-size: 9px;
@@ -144,8 +145,7 @@
                                 margin-top: -3px;">MAX &nbsp;&nbsp; MIN</p>
                             </div>
                         </div>
-                        <table style="width: 100%; font-size: 8px;position: absolute;
-    bottom: 6px;">
+                        <table style="width: 100%; font-size: 8px;">
                             <tr>
                                 <th colspan="2"><?php echo $a->name[1]; ?></th>
                             </tr>
@@ -159,6 +159,7 @@
                             </tr>
                         </table>
                     </div>
+                </div>
                     <?php 
                     $i++;
                 endforeach ?>
@@ -171,19 +172,19 @@
             <div class="category-button-slide">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="btn btn-light active" id="pills-PupukCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-pupuk" type="button" role="tab" aria-controls="pills-category-pupuk" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/pupuk.png" style="height: 21px; margin-bottom: 5px;"/></span>Pupuk</button>
+                        <button class="btn active" id="pills-PupukCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-pupuk" type="button" role="tab" aria-controls="pills-category-pupuk" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/pupuk.png" style="height: 21px; margin-bottom: 5px;"/></span>Pupuk</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="btn btn-light" id="pills-BibitCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-bibit" type="button" role="tab" aria-controls="pills-category-bibit" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/bibit.png" style="height: 21px; margin-bottom: 5px;"/></span>Benih</button>
+                        <button class="btn" id="pills-BibitCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-bibit" type="button" role="tab" aria-controls="pills-category-bibit" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/bibit.png" style="height: 21px; margin-bottom: 5px;"/></span>Benih</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="btn btn-light" id="pills-PestisidaCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-pestisida" type="button" role="tab" aria-controls="pills-category-pestisida" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/pesticide.png" style="height: 21px; margin-bottom: 5px;"/></span>Pestisida</button>
+                        <button class="btn" id="pills-PestisidaCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-pestisida" type="button" role="tab" aria-controls="pills-category-pestisida" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/pesticide.png" style="height: 21px; margin-bottom: 5px;"/></span>Pestisida</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="btn btn-light" id="pills-SembakoCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-sembako" type="button" role="tab" aria-controls="pills-category-sembako" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/groceries.png" style="height: 21px; margin-bottom: 5px;"/></span>Sembako</button>
+                        <button class="btn" id="pills-SembakoCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-sembako" type="button" role="tab" aria-controls="pills-category-sembako" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/groceries.png" style="height: 21px; margin-bottom: 5px;"/></span>Sembako</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="btn btn-light" id="pills-AlattaniCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-alattani" type="button" role="tab" aria-controls="pills-category-alattani" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/rake.png" style="height: 21px; margin-bottom: 5px;"/></span>Alat Tani</button>
+                        <button class="btn" id="pills-AlattaniCategory-tab" data-bs-toggle="pill" data-bs-target="#pills-category-alattani" type="button" role="tab" aria-controls="pills-category-alattani" aria-selected="true"><span style="margin: 0 3px;"><img src="<?php echo base_url() ?>img/rake.png" style="height: 21px; margin-bottom: 5px;"/></span>Alat Tani</button>
                     </li>
                 </ul>
             </div>
@@ -228,7 +229,17 @@
                                         </tr>
 
                                     </table>
-                                    <a class="link-to" href="<?php echo base_url() ?>Home/detail_product/<?php echo $v->id_produk ?>"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
+                                    <?php
+                                    if ($this->session->userdata('role')) {
+                                        ?>
+                                        <a class="link-to" href="<?php echo base_url() ?>Home/detail_product/<?php echo $v->id_produk ?>"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <button class="btnpesannow" onclick="document.getElementById('account_menu').click();"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                                        <?php
+                                    }
+                                    ?>
                                 </div>
                             </div>
                             <?php
@@ -276,7 +287,16 @@
                                         </tr>
 
                                     </table>
-                                    <a class="link-to" href="<?php echo base_url() ?>Home/detail_product/<?php echo $v->id_produk ?>"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
+                                    <?php
+                                    if ($this->session->userdata('role')) {
+                                        ?>
+                                        <a class="link-to" href="<?php echo base_url() ?>Home/detail_product/<?php echo $v->id_produk ?>"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <button class="btnpesannow" onclick="document.getElementById('account_menu').click();"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                                        <?php
+                                    }?>
                                 </div>
                             </div>
                             <?php
@@ -323,7 +343,16 @@
                                         </tr>
 
                                     </table>
-                                    <a class="link-to" href="<?php echo base_url() ?>Home/detail_product/<?php echo $v->id_produk ?>"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
+                                    <?php
+                                    if ($this->session->userdata('role')) {
+                                        ?>
+                                        <a class="link-to" href="<?php echo base_url() ?>Home/detail_product/<?php echo $v->id_produk ?>"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</a>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <button class="btnpesannow" onclick="document.getElementById('account_menu').click();"><span><i class="fa fa-shopping-cart fa-fw"></i></span></span> Pesan Sekarang</button>
+                                        <?php
+                                    }?>
                                 </div>
                             </div>
                             <?php
