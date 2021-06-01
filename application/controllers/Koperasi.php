@@ -101,14 +101,6 @@ class Koperasi extends CI_Controller {
 
 	}
 
-	public function pick_form()
-	{
-
-		$this->load->view('koperasi/header');
-		$this->load->view('koperasi/pick_form');
-		$this->load->view('koperasi/footer_pickform');
-	}
-
 	public function account_menu()
 	{
 		$iduser = $this->session->userdata('iduser'); //ambil data berdasarkan sessionuserdata

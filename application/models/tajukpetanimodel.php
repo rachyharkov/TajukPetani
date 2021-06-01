@@ -11,6 +11,14 @@ class tajukpetanimodel extends CI_Model
         return $qinfo->result(); 
 	}
 
+    function fetchinfoakunassingledata($table,$where)
+    {
+        $select = array('*');
+
+        $qinfo = $this->db->select($select)->from($table)->where($where)->get();
+        return $qinfo->row(); 
+    }
+
 	function lakukan_update($where,$data,$table)
 	{
 		$this->db->where($where);
@@ -22,6 +30,59 @@ class tajukpetanimodel extends CI_Model
 		$insert = $this->db->insert($table,$data);
 		return $insert;
 	}
+
+    function generateInvoice($iduser){
+        
+        $this->db->select('SUBSTRING(pesanan.id_invoice,5, 5) as id_invoice', FALSE);
+        $this->db->where('id_user', $iduser);
+        $this->db->order_by('id_invoice','DESC');
+        $this->db->limit(1);
+        $query = $this->db->get('pesanan');
+
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < 3; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+
+        if($query->num_rows() <> 0){ //pastikan data ada
+            $data = $query->row();
+            $kode = intval($data->id_invoice) + 1; //tambah data baru bukan berdasarkan dari id username    
+        } else {//kalo masih baru, start dari 0
+             $kode = 0;
+        }
+
+        $batas = str_pad($kode, 5, "0", STR_PAD_LEFT);    
+        $kodetampil = "INV-".$batas.$randomString;
+        return $kodetampil;
+    }
+
+    function get_invoice($iduser, $idinvoice)
+    {
+        $where = array(
+            'pesanan.id_user' => $iduser,
+            'pesanan.id_invoice' => $idinvoice
+        );
+
+        $this->db->select('*')->from('pesanan')
+            ->join('user','user.id_user = pesanan.id_user')
+            ->join('detail_produk','detail_produk.id_produk = pesanan.id_produk');
+        $this->db->where($where);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
+    function countactivetransaction($iduser)
+    {
+        $where = array(
+            'id_user' => $iduser,
+            'status_invoice' => 'BELUM DIBAYAR'
+        );
+        $this->db->where($where);
+        $this->db->from("pesanan");
+        return $this->db->count_all_results();
+    }   
 
 	/*function tampil_peserta()
     {

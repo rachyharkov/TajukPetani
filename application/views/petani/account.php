@@ -44,9 +44,9 @@
 			<p style="margin: 0; font-size: 12px;">Pemasukan</p>
 		</div>
 		<div>
-			<p style="font-size: 14px; font-weight: bold; margin-bottom: 4px;">2</p>
+			<p style="font-size: 14px; font-weight: bold; margin-bottom: 4px;"><?php echo $countrunningtransaction; ?></p>
 			<p style="margin: 0; font-size: 10px; color: gray;">Transaksi</p>
-			<p style="margin: 0; font-size: 12px;">Pending</p>
+			<p style="margin: 0; font-size: 12px;">Berjalan</p>
 		</div>
 	</div>
 	
@@ -57,8 +57,8 @@
     justify-content: space-evenly;
     align-content: flex-start;">
 		<a class="menu-nav-account-button" href="<?php echo base_url() ?>koperasi/koperasi_products">
-			<i class="fas fa-box fa-5x" style="width: 67px;"></i>
-			<p style="margin: 8px 0;">Produk</p>
+			<i class="fas fa-users fa-5x" style="width: 67px;"></i>
+			<p style="margin: 8px 0;">Koperasi</p>
 		</a>
 		<a class="menu-nav-account-button" href="#">
 			<i class="fas fa-calendar-alt fa-5x" style="width: 67px;"></i>

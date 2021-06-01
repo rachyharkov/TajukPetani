@@ -195,9 +195,12 @@ class Home extends CI_Controller {
 			$where = array(
 				"id_user" => $iduser
 			);
-			$data['qinfo'] = $this->tajukpetanimodel->tampilinformasiakun('user',$where);
-			$data['title'] = 'Akun Saya - Tajuk Petani Web App';
-			$this->load->view('petani/account', $data);
+			$data = array(
+				'qinfo' => $this->tajukpetanimodel->tampilinformasiakun('user',$where),
+				'title' => 'Akun Saya - Tajuk Petani Web App',
+				'countrunningtransaction' => $this->tajukpetanimodel->countactivetransaction($iduser)
+			);
+			$this->load->view('petani/account',$data);
 		} else {
 			$this->load->view('visitor/account');
 		}

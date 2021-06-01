@@ -164,7 +164,7 @@ foreach ($qinfo as $k) {
       <div style="width: 100%;
     height: 2em;
     text-align: center;
-    margin-top: -4vh;
+    margin-top: -2vh;
     position: relative;
     display: flex;">
         <button style="height: 5px;
@@ -359,6 +359,12 @@ margin: 12px 0 20px 0;">
     }
 
 
+    function showConfirmationWindow() {
+      $('#confirmation-window').css('bottom','0%');
+
+      $('html').css('overflow','hidden');
+    }
+
     $(window).on('load',function() {
       $("#loading").removeClass("wait");
       console.log("loaded!");
@@ -396,7 +402,6 @@ margin: 12px 0 20px 0;">
       $('#jumlahtxt').text(jumlah);
       $('#tbsubtotal').text(harga * jumlah);
       $('#valuetotal').text(harga * jumlah);
-      $('#valuetotalkonfirmasi').text(harga * jumlah);
     });
 
     $('#btn-increase').click(function() {
@@ -409,7 +414,6 @@ margin: 12px 0 20px 0;">
       $('#tbsubtotal').text(harga * jumlah);
       $('#jumlahtxt').text(jumlah);
       $('#valuetotal').text(harga * jumlah);
-      $('#valuetotalkonfirmasi').text(harga * jumlah);
     });
 
     $(document).ready(function(){
@@ -470,18 +474,20 @@ margin: 12px 0 20px 0;">
         return; 
       }
 
-      $('#confirmation-window').css('bottom','0%');
-
       var total = parseInt($('#tbsubtotal').text()) + parseInt($('#tbvalueppn').text());
 
       $('#tbtotal').text(total);
+      $('#valuetotalkonfirmasi').text(total);
 
       var valuecatatan = $('#textareacatatadan').val();
       $('#tbcatatan').text(valuecatatan);
+
+      showConfirmationWindow();
     });
 
     $('#btn-close-confirmation-window').click(function(){
       $('#confirmation-window').css('bottom','-100%');
+      $('html').css('overflow','auto');
     });
 
     var swiper = new Swiper('.swiper-container', {
@@ -497,7 +503,6 @@ margin: 12px 0 20px 0;">
             'pointer-events':'none'
         }).html('<i class="fas fa-circle-notch fa-spin"></i>');
         
-        var iduser = '<?php echo $this->session->userdata('id_user'); ?>';
         var idproduk = '<?php echo $id_produk ?>';
         var jumbel = jumlah;
         var tanggalambil = $('#tbtanggalAmbil').text();
@@ -508,15 +513,16 @@ margin: 12px 0 20px 0;">
         var catatan = $('#textareacatatadan').val();
         //pass object in post
 
-        var dataString = {'iduser': iduser , 'idproduk': idproduk , 'jumbel': jumbel , 'tanggalambil': tanggalambil,'jamambil': jamambil,'totalharga': totalharga, 'metodebayar': metodebayar,'catatan': catatan};
+        var dataString = {'idproduk': idproduk , 'jumbel': jumbel , 'tanggalambil': tanggalambil,'batasambil': batasambil,'jamambil': jamambil,'totalharga': totalharga, 'metodebayar': metodebayar,'catatan': catatan};
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url(); ?>petani/insert_product_operation",
+            url: "<?php echo base_url(); ?>petani/insert_pesanan",
             data: dataString,
             dataType: 'json',
-            cache: false,
             success: function(result){
-              alert(result.msg);
+              $('#confirmation-window').css('bottom','-100%');
+              $("#loading").addClass("wait");
+              window.location.href = `<?php echo base_url() ?>Petani/view_invoice/${result.iduser}/${result.idinvoice}`
             },
             error: function(e){
               $("#btnkonfirmasipesanan").css({

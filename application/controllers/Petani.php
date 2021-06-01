@@ -28,71 +28,77 @@ class Petani extends CI_Controller {
 		$this->load->helper(array('form', 'url','text'));
     }
 
-	public function index()
+	public function view_invoice($iduser, $idinvoice)
 	{
-        $iduser = $this->session->userdata('iduser'); //ambil data berdasarkan sessionuserdata
-		$where = array(
-			"id_user" => $iduser
-		);
-		$data['qinfo'] = $this->tajukpetanimodel->tampilinformasiakun('user',$where);
-
-		$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('Pupuk');
-		$data['title'] = 'Beranda - Tajuk Petani Web App';
-		$this->load->view('petani/header',$data);
-		$this->load->view('petani/index');
-		$this->load->view('petani/footer');
-	}
-
-
-	public function detail_product()
-	{
-		$this->load->view('visitor/header');
-		$this->load->view('visitor/detail_product');
-		$this->load->view('visitor/footer_detail_product');
-	}
-
-	public function pick_form()
-	{
-		$this->load->view('visitor/header');
-		$this->load->view('visitor/pick_form');
-		$this->load->view('visitor/footer_pickform');
+		$row = $this->tajukpetanimodel->get_invoice($iduser, $idinvoice);
+        if ($row) {
+            $data = array(
+            	'action' => site_url('career/submit_berkas'),
+				'id_invoice' => $row->id_invoice,
+				'nama' => $row->nama,
+				'nama_produk' => $row->nama_produk,
+				'total_harga'=> $row->total_harga,
+				'alamat_user' => $row->alamat_user,
+				'harga' => $row->harga,
+				'jumbel' => $row->jumbel,
+				'tanggal_pengajuan' => $row->tanggal_pengajuan,
+				'tanggal_pengambilan' => $row->tanggal_pengambilan,
+				'batas_pengambilan' => $row->batas_pengambilan,
+				'jam_ambil' => $row->jam_ambil,
+				'metode_bayar' => $row->metode_bayar,
+				'catatan' => $row->catatan,
+				'status_invoice' => $row->status_invoice
+		    );
+		    $this->load->view('petani/header', $data);
+			$this->load->view('petani/invoice_page', $data);
+		}else{
+			echo "No Data for ".$idinvoice;
+			echo $row->id_invoice;
+		}
+		
 	}
 
 	public function insert_pesanan()
 	{
+		$iduser = $this->session->userdata('iduser'); //ambil data berdasarkan sessionuserdata
+		$where = array(
+			"id_user" => $iduser
+		);
+		$data = $this->tajukpetanimodel->fetchinfoakunassingledata('user',$where);
 
-		$iduser = trim($this->input->post('iduser'));
+		$idinvoice = $this->tajukpetanimodel->generateInvoice($iduser);
         $idproduk = trim($this->input->post('idproduk'));
         $jumbel = trim($this->input->post('jumbel'));
-        $tanggalpengambilan = trim($this->input->post('tanggalpengambilan'));
-        $bataspengambilan = trim($this->input->post('bataspengambilan'));
+        $tanggalpengambilan = trim($this->input->post('tanggalambil'));
+        $bataspengambilan = trim($this->input->post('batasambil'));
         $jamambil = trim($this->input->post('jamambil'));
         $totalharga = trim($this->input->post('totalharga'));
         $metodebayar = trim($this->input->post('metodebayar'));
         $catatan = trim($this->input->post('catatan'));
         
         $data = array(
-        			'id_user' => $iduser,
-                    'id_produk' => $idproduk,
-                    'jumbel' => $jumbel,
-                    'tanggal_pengambilan' => $tanggalpengambilan,
-                    'batas_pengambilan' => $bataspengambilan,
-                    'jam_ambil' => $jamambil,
-                    'total_harga' => $totalharga,
-                    'metode_bayar' => $metodebayar,
-                    'catatan' => $catatan
-                ); 
+			'id_user' => $iduser,
+			'id_invoice' => $idinvoice,
+            'id_produk' => $idproduk,
+            'jumbel' => $jumbel,
+            'tanggal_pengambilan' => $tanggalpengambilan,
+            'batas_pengambilan' => $bataspengambilan,
+            'jam_ambil' => $jamambil,
+            'total_harga' => $totalharga,
+            'metode_bayar' => $metodebayar,
+            'catatan' => $catatan,
+            'status_invoice' => 'BELUM DIBAYAR'
+        );
 
 
         //print_r($data);
         //print_r($filestype);
       	$this->tajukpetanimodel->lakukan_insert('pesanan',$data);   
-      	$res['msg']="successfull";
+      	$result['iduser']= $iduser;
+      	$result['idinvoice']= $idinvoice;
       	//no need to set flash session in CI for ajax
         //$this->session->set_flashdata('flashSuccess', 'successfull');
          //set page header as json format
-        //$this->output->set_content_type('application/json')
-        //->set_output(json_encode($res));*/
-        $this->tambah_product();
+        $this->output->set_content_type('application/json')->set_output(json_encode($result));
 	}
 }
