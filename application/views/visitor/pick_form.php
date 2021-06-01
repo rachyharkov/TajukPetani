@@ -80,7 +80,7 @@
             position: relative;"><span style="position: absolute;top: -2px;left: 5px; font-weight: bold; color:#89BF43">+</span></button>
           </div>
           <div style="grid-column: 1/4;">
-            <p style="margin: 1rem 0 7px 0;font-weight: 600;">Pilih Hari</p>
+            <p style="margin: 1rem 0 7px 0;font-weight: 600;">Pilih Hari  <span id="pilihhariwarn" style="font-size: 11px; color: red; display: none;"> *Harap pilih hari pengambilan</span></p>
             <div style="display: flex; flex-wrap: wrap;">
               <?php
               $date = date('Y-m-d'); //today date
@@ -104,7 +104,7 @@
             </div>
           </div>
           <div style="grid-column: 1/4;">
-            <p style="margin: 1rem 0 7px 0;font-weight: 600;">Pilih Waktu</p>
+            <p style="margin: 1rem 0 7px 0;font-weight: 600;">Pilih Waktu <span id="pilihjamwarn" style="font-size: 11px; color: red; display: none;"> *Harap pilih jam pengambilan</span></p>
             <div style="display: flex; flex-wrap: wrap;">
               <?php
               $arrayJam = ["07.00","09.00","11.00","13.00","15.00","17.00"];
@@ -121,7 +121,7 @@
           </div>
 
           <div style="grid-column: 1/4;">
-            <p style="margin: 1rem 0 7px 0;font-weight: 600;">Pilih Metode Bayar</p>
+            <p style="margin: 1rem 0 7px 0;font-weight: 600;">Pilih Metode Bayar <span id="pilihmetodebayarwarn" style="font-size: 11px; color: red; display: none;"> *Harap pilih metode bayar anda</span></p>
             <div style="display: flex; flex-wrap: wrap;">
               <?php
               $arrayMetodeBayar = ["Bayar di Koperasi","Saldo Koperasi","Transfer Bank"];
@@ -223,7 +223,7 @@ margin: 12px 0 20px 0;">
             </div>
           </div>
         </div>
-        <hr>
+        <hr style="margin: 5px 0;">
         <div style="display: grid; grid-template-columns: 1fr 0.7fr;">
           <div>
             <div style="margin: 5px 0;">
@@ -237,8 +237,7 @@ margin: 12px 0 20px 0;">
             </div>
           </div>
         </div>
-        <hr>
-
+        <hr style="margin: 5px 0;">
         <div style="display: grid; grid-template-columns: 1fr 0.6fr;">
           <div>
             <p class="p-title">Pilihan Barang</p>
@@ -313,6 +312,18 @@ margin: 12px 0 20px 0;">
 <?php
   }
 ?>
+    <div class="toast align-items-center text-white bg-secondary border-0" role="alert" aria-live="assertive" aria-atomic="true" style="position: fixed;
+    bottom: -100%;
+    width: 100%;
+    height: 10vh;
+    line-height: 6vh;">
+      <div class="d-flex">
+        <div class="toast-body">
+          <span id="texttoast">Hello, world! This is a toast message.</span>
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
       
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <!-- Optional JavaScript; choose one of the two! -->
@@ -332,6 +343,20 @@ margin: 12px 0 20px 0;">
 
     let jumlah = 0;
     const harga = <?php echo $harga ?>;
+    
+
+    function spawnToast(string) {
+      var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+      var toastList = toastElList.map(function(toastEl) {
+      // Creates an array of toasts (it only initializes them)
+        return new bootstrap.Toast(toastEl) // No need for options; use the default options
+      });
+      toastList.forEach((toast) => {
+        toast.show();
+        $('.toast').css('bottom',0);
+      }); // This show them    
+      $('#texttoast').text(string);
+    }
 
 
     $(window).on('load',function() {
@@ -350,18 +375,12 @@ margin: 12px 0 20px 0;">
     $('.tbnominal').keyup(function() {
       if ($('.tbnominal').val() > <?php echo $stok; ?>) {
         alert('udah, stoknya cuman segitu');
-        $('.tbnominal').css('border-bottom','0px solid #dc3545').val(<?php echo $stok; ?>);
-        return;
-      }
-
-      if ($('.tbnominal').val() > <?php echo $stok; ?>) {
-        alert('udah kurang dari 0 mah');
-        $('.tbnominal').css('border-bottom','0px solid #dc3545').val(0);
+        $('.tbnominal').css('border-bottom','1px solid #dc3545').val(<?php echo $stok; ?>);
         return;
       }
 
       if ($('.tbnominal').val() <= <?php echo $stok; ?>) {
-        $('.tbnominal').css('border-bottom','0px solid #000000');
+        $('.tbnominal').css('border-bottom','1px solid #000000');
       }
 
       jumlah = $('.tbnominal').val();
@@ -407,6 +426,7 @@ margin: 12px 0 20px 0;">
         //console.log(moment(targetDate).format('DD/MM/YYYY'));
         $('#tbbatasAmbil').text(moment(targetDate).format('DD/MM/YYYY'));
         $('#tbtanggalAmbil').text(val);
+        $('#pilihhariwarn').css('display','none');
       }
     });
 
@@ -414,6 +434,7 @@ margin: 12px 0 20px 0;">
       if ($(this).is(':checked')) {
         var val = $(this).val();
         $('#tbjamAmbil').text(val);
+        $('#pilihjamwarn').css('display','none');
       }
     });
 
@@ -421,10 +442,34 @@ margin: 12px 0 20px 0;">
       if ($(this).is(':checked')) {
         var val = $(this).val();
         $('#tbmetodebayar').text(val);
+        $('#pilihmetodebayarwarn').css('display','none');
       }
     });
 
     $('#btn-spawn-confirmation-window').click(function(){
+
+      if(!$('input[name="selectorhari"]').is(':checked')){
+        $('#pilihhariwarn').css('display','initial');
+        spawnToast('Pilih hari pengambilan');
+        return;
+      }
+      if(!$('input[name="selectorjam"]').is(':checked')){
+        $('#pilihjamwarn').css('display','initial');
+        spawnToast('Pilih jam pengambilan');
+        return;
+      }
+      if(!$('input[name="selectormetodebayar"]').is(':checked')){
+        $('#pilihmetodebayarwarn').css('display','initial');
+        spawnToast('Pilih metode bayar');
+        return;
+      }
+
+      if ($('.tbnominal').val() < 1) {
+        $('.tbnominal').css('border-bottom','1px solid #dc3545');
+        spawnToast('Berapa stok yang ingin diambil?');
+        return; 
+      }
+
       $('#confirmation-window').css('bottom','0%');
 
       var total = parseInt($('#tbsubtotal').text()) + parseInt($('#tbvalueppn').text());
@@ -463,54 +508,23 @@ margin: 12px 0 20px 0;">
         var catatan = $('#textareacatatadan').val();
         //pass object in post
 
-        if (!tbdeskripsi) {
-            $("div#indicatordescription").empty().append('<i class="fas fa-exclamation-circle" style="color: orange;margin: auto;"></i>');
-            $("#btnsubmitProduk").css({
-                'opacity':'1',
-                'pointer-events':'initial'
-            }).html('Tayangkan');
-            return;   
-        }
-
-        var form_data = new FormData();
-        var ins = document.getElementById('tbimageProduct').files.length;
-        for (var x = 0; x < ins; x++) {
-            form_data.append("files[]", document.getElementById('tbimageProduct').files[x]); //files[] adalah value dari property name (penting digunakan saat ngupload file)
-        }
-        console.log(form_data);
-        $.ajax({
-            url: "<?php echo base_url() ?>/koperasi/uploadGambarProduk", 
-            dataType: 'text',
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,
-            type: 'post',
-            success: function (response) {
-                var obje = JSON.parse(response);
-                console.log(obje);
-                console.log('succes lah pokoknya mah');
-                $('.good').css('display','flex');
-                 $("#btnsubmitProduk").html('<i class="fas fa-check-circle"></i>');
-                 window.location.href = "<?php echo base_url() ?>Koperasi/koperasi_products";
-            },
-            error: function (response) {
-                //$('#msg').html(response); // display error response from the server
-                console.log('error');
-                console.log(response);
-            }
-        });//ajax here
-        // AJAX Code To Submit Form.
-        var dataString = {'tbnamaproduk': tbnamaproduk , 'tbstok': tbstok , 'tbminpemesanan': tbminpemesanan , 'tbkondisi': tbkondisi,'tbkategori': tbkategori,'tbvarian': tbvarian, 'tbberatnumber': tbberatnumber,'tbjenissatuan': tbjenissatuan,'tbjenisbantuan': tbjenisbantuan,'tbdeskripsi':tbdeskripsi,'tbharga':tbharga,'jumlahfile': arraynamafile.length,'filestype': arraynamafiletipe};
+        var dataString = {'iduser': iduser , 'idproduk': idproduk , 'jumbel': jumbel , 'tanggalambil': tanggalambil,'jamambil': jamambil,'totalharga': totalharga, 'metodebayar': metodebayar,'catatan': catatan};
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url(); ?>koperasi/insert_product_operation",
+            url: "<?php echo base_url(); ?>petani/insert_product_operation",
             data: dataString,
             dataType: 'json',
             cache: false,
             success: function(result){
-                alert(result.msg);
-
+              alert(result.msg);
+            },
+            error: function(e){
+              $("#btnkonfirmasipesanan").css({
+                  'opacity':'1',
+                  'pointer-events':'auto'
+              }).html('Ajukan');
+              $('#confirmation-window').css('bottom','-100%');
+              spawnToast('Terjadi kesalahan');
             }
         });
         return false;
