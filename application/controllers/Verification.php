@@ -48,6 +48,13 @@ class Verification extends CI_Controller
                 $this->session->set_userdata($data_session);
                 echo "petani";
             } else {
+            	$data_session = array(
+                    'nama' => $cek1->row()->nama,
+                    'status' => "login",
+                    'iduser' => $cek1->row()->id_user, 
+                    'role' => $cek1->row()->role
+                );
+                $this->session->set_userdata($data_session);
                 echo "admin";
             }
         } else {
@@ -63,6 +70,7 @@ class Verification extends CI_Controller
         );
 
 		$cek1 = $this->Auth_model->cek_user("user",$where);
+
 
 		if ($cek1->num_rows() > 0) //kondisi berdasarkan jumlah record
 		{

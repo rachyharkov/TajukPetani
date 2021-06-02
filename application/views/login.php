@@ -185,11 +185,8 @@
             $("#loading").addClass("wait");
             window.location.href = baseUrl + "home/index";
           } else if(data == "admin") {
-            Swal.fire({
-              type: 'error',
-              title: 'Login Gagal!',
-              text: 'Ngapain njir!'
-            });
+            $("#loading").addClass("wait");
+            window.location.href = baseUrl + "admin/index";
           } else {
             $('.textwarning').html('<div class="alert alert-danger alert-once alert-dismissible fade show" role="alert" style="font-size: 12px; padding: 8px;">Kode OTP salah, mohon cek kembali<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding: 1em;"></button></div>');
           }
@@ -259,11 +256,6 @@
             });
           }
       });
-
-      $("#btnreallogin").click(function(){
-        
-      });
-      
     })
     </script>
   </body>
