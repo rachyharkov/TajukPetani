@@ -77,12 +77,60 @@ class tajukpetanimodel extends CI_Model
     {
         $where = array(
             'id_user' => $iduser,
-            'status_invoice' => 'BELUM DIBAYAR'
+            'status_invoice' => 'BELUM DIBAYAR',
+            'status_invoice' => 'DALAM PERJALANAN',
+            'status_invoice' => 'MENUNGGU DIAMBIL'
         );
         $this->db->where($where);
         $this->db->from("pesanan");
         return $this->db->count_all_results();
-    }   
+    }
+
+    function countalltransaction($iduser)
+    {
+        $where = array(
+            'id_user' => $iduser,
+        );
+        $this->db->where($where);
+        $this->db->from("pesanan");
+        return $this->db->count_all_results();
+    }
+
+    function counttransaction($iduser, $status)
+    {
+        $where = array(
+            'id_user' => $iduser,
+            'status_invoice' => $status,
+        );
+        $this->db->where($where);
+        $this->db->from("pesanan");
+        return $this->db->count_all_results();
+    }
+
+    function showalltransaction($iduser) {
+        $where = array(
+            'pesanan.id_user' => $iduser
+        );
+        $this->db->select('*')->from('pesanan')
+            ->join('user','user.id_user = pesanan.id_user')
+            ->join('detail_produk','detail_produk.id_produk = pesanan.id_produk');
+        $this->db->where($where);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function showtransactionfor($iduser, $status) {
+        $where = array(
+            'pesanan.id_user' => $iduser,
+            'pesanan.status_invoice' => $status
+        );
+        $this->db->select('*')->from('pesanan')
+            ->join('user','user.id_user = pesanan.id_user')
+            ->join('detail_produk','detail_produk.id_produk = pesanan.id_produk');
+        $this->db->where($where);
+        $query = $this->db->get();
+        return $query->result();
+    }
 
 	/*function tampil_peserta()
     {

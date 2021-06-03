@@ -58,6 +58,37 @@ class Petani extends CI_Controller {
 		
 	}
 
+	public function batalkan_transaksi() {
+		$this->koperasi_model->lakukan_delete('id_produk', $id);
+        $this->transaksi();
+	}
+
+	public function transaksi()
+	{
+		$iduser = $this->session->userdata('iduser'); //ambil data berdasarkan sessionuserdata
+		$where = array(
+			"id_user" => $iduser
+		);
+		$data['qinfo'] = $this->tajukpetanimodel->tampilinformasiakun('user',$where);
+
+		$data['all'] = $this->tajukpetanimodel->showalltransaction($iduser);
+		$data['belumdibayars'] = $this->tajukpetanimodel->showtransactionfor($iduser,'BELUM DIBAYAR');
+		$data['menunggudiambils'] = $this->tajukpetanimodel->showtransactionfor($iduser, 'MENUNGGU DIAMBIL');
+		$data['dalamperjalanans'] = $this->tajukpetanimodel->showtransactionfor($iduser, 'DALAM PERJALANAN');
+		$data['selesais'] = $this->tajukpetanimodel->showtransactionfor($iduser, 'SELESAI');
+
+		$data['hitungall'] = $this->tajukpetanimodel->countalltransaction($iduser);
+		$data['hitungbelumdibayar'] = $this->tajukpetanimodel->counttransaction($iduser, 'BELUM DIBAYAR');
+		$data['hitungmenunggudiambil'] = $this->tajukpetanimodel->counttransaction($iduser, 'MENUNGGU DIAMBIL');
+		$data['hitungdalamperjalanan'] = $this->tajukpetanimodel->counttransaction($iduser, 'DALAM PERJALANAN');
+		$data['hitungselesai'] = $this->tajukpetanimodel->counttransaction($iduser, 'SELESAI');
+
+		$data['title'] = 'Daftar Transaksi - Tajuk Petani Web App';
+
+		$this->load->view('petani/header', $data);
+		$this->load->view('petani/transaksi_list', $data);
+	}
+
 	public function insert_pesanan()
 	{
 		$iduser = $this->session->userdata('iduser'); //ambil data berdasarkan sessionuserdata
@@ -100,5 +131,16 @@ class Petani extends CI_Controller {
         //$this->session->set_flashdata('flashSuccess', 'successfull');
          //set page header as json format
         $this->output->set_content_type('application/json')->set_output(json_encode($result));
+	}
+
+	public function update_status_invoice($idinvoice, $status) {
+		$data = array(
+			'status_invoice' => $status
+		);
+		$where = array(
+			'id_invoice' => $idinvoice
+		);
+		$this->tajukpetanimodel->lakukan_update($where,$data,'pesanan');
+		$this->transaksi();
 	}
 }

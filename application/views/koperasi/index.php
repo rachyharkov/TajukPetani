@@ -173,6 +173,53 @@
             </div>
         </div>
 
+        <div class="container">
+            <h4 style="font-weight: bold;">Musim Cocok Tanam</h4>
+            <p style="margin: 0; font-size: 10px;">Terakhir update : 1 Juni 2021 <span class="badge bg-warning text-dark">Memasuki Musim Hujan</span></p>
+        </div>
+        <div style="width: 100%;">
+            <div style="overflow-x: scroll;overflow-y: hidden;">
+                <div class="card-slider">
+                    <?php
+                        for ($i=0; $i < 5 ; $i++) { 
+                            ?>
+
+                            <div class="card">
+                                <div style="background: radial-gradient(ellipse at 80% 36%, #f9f9f900 18%, #83b734 70%);
+                                    z-index: 1;
+                                    height: 100%;
+                                    padding: 0.7em;
+                                    color: white;">
+                                    <div style="display: flex;
+                                        flex-direction: column;
+                                        justify-content: space-between;
+                                        height: 100%;">
+                                        <div>
+                                            Kangkung
+                                        </div>
+                                        <p style="font-style: normal;
+                                            font-weight: bold;
+                                            font-size: 20px;
+                                            line-height: 27px;
+                                            margin: 0;">Januari</p>
+                                    </div>
+                                </div>
+                                <img src="<?php echo base_url() ?>img/mc-kangkung.png" style="position: absolute;
+                                    width: 100%;
+                                    top: -24px;
+                                    right: -19px;
+                                    object-fit: cover;
+                                    transform: scale(0.8);">
+                            </div>
+
+                            <?php
+                        }
+                    ?>
+                    
+                </div>
+            </div>
+        </div>
+        
         <div class="container" style="margin-top: 1em;padding: 0;">
             <h4 style="font-weight: bold;padding: 0 2vh;">Unggulan</h4>
             <div class="category-button-slide">

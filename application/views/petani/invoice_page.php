@@ -151,11 +151,10 @@
         background: #89BF43;
         font-weight: 700;
         border: none;">Cetak</button>
-    <a href="<?php echo base_url() ?>Home" class="btn btn-light link-to" style="width: 100%;
+    <a href="<?php echo base_url() ?>Petani/transaksi" class="btn btn-light link-to" style="width: 100%;
         font-weight: 700;
 				border: 1px solid #cfcfcf;
-        margin-top: 10px;">Menu Utama</a>
-
+        margin-top: 10px;">Kembali</a>
   </div>
 </div>
 

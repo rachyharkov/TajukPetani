@@ -56,7 +56,7 @@
     height: 100%;
     justify-content: space-evenly;
     align-content: flex-start;">
-		<a class="menu-nav-account-button" href="<?php echo base_url() ?>koperasi/koperasi_products">
+		<a class="menu-nav-account-button" href="<?php echo base_url() ?>koperasi">
 			<i class="fas fa-users fa-5x" style="width: 67px;"></i>
 			<p style="margin: 8px 0;">Koperasi</p>
 		</a>
@@ -64,7 +64,7 @@
 			<i class="fas fa-calendar-alt fa-5x" style="width: 67px;"></i>
 			<p style="margin: 8px 0;">Jadwal</p>
 		</a>
-		<a class="menu-nav-account-button" href="#">
+		<a class="menu-nav-account-button" href="<?php echo base_url() ?>petani/transaksi">
 			<i class="fas fa-money-bill fa-5x" style="width: 67px;"></i>
 			<p style="margin: 8px 0;">Transaksi</p>
 		</a>
