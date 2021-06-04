@@ -1,4 +1,4 @@
-<div class="account-window">
+<div class="account-window" style="margin-top: 6em;">
 	<div class="account-window-wrapper">
 		<img class="img-petani-phone" src="<?php echo base_url() ?>img/petani-phone.png">
 		<p>Dapatkan benefit lebih dengan gabung bersama Tajuk Petani</p>

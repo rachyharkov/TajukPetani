@@ -64,7 +64,7 @@
 			<i class="fas fa-calendar-alt fa-5x" style="width: 67px;"></i>
 			<p style="margin: 8px 0;">Jadwal</p>
 		</a>
-		<a class="menu-nav-account-button" href="#">
+		<a class="menu-nav-account-button" href="<?php echo base_url() ?>koperasi/transaksi">
 			<i class="fas fa-money-bill fa-5x" style="width: 67px;"></i>
 			<p style="margin: 8px 0;">Transaksi</p>
 		</a>

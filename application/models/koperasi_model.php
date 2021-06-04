@@ -91,4 +91,69 @@ class Koperasi_model extends CI_Model
         $this->db->where($column, $id);
         $this->db->delete('detail_produk');
     }
+
+    function countactivetransaction($koperasi)
+    {
+        $where = array(
+            'detail_produk.koperasi' => $koperasi,
+            'pesanan.status_invoice' => 'BELUM DIBAYAR',
+            'pesanan.status_invoice' => 'DALAM PERJALANAN',
+            'pesanan.status_invoice' => 'MENUNGGU DIAMBIL'
+        );
+        $this->db->where($where);
+        $this->db->from("pesanan")
+            ->join('detail_produk','detail_produk.id_produk = pesanan.id_produk')
+            ->join('user','user.id_user = detail_produk.koperasi');
+        return $this->db->count_all_results();
+    }
+
+    function countalltransaction($koperasi)
+    {
+        $where = array(
+            'detail_produk.koperasi' => $koperasi,
+        );
+        $this->db->where($where);
+        $this->db->from("pesanan")
+            ->join('detail_produk','detail_produk.id_produk = pesanan.id_produk')
+            ->join('user','user.id_user = detail_produk.koperasi');
+        return $this->db->count_all_results();
+    }
+
+    function counttransaction($koperasi, $status)
+    {
+        $where = array(
+            'detail_produk.koperasi' => $koperasi,
+            'status_invoice' => $status,
+        );
+        $this->db->where($where);
+        $this->db->from("pesanan")
+            ->join('detail_produk','detail_produk.id_produk = pesanan.id_produk')
+            ->join('user','user.id_user = detail_produk.koperasi');
+        return $this->db->count_all_results();
+    }
+
+    function showalltransaction($koperasi) {
+        $where = array(
+            'detail_produk.koperasi' => $koperasi
+        );
+        $this->db->select('*')->from('pesanan')
+            ->join('user','user.id_user = pesanan.id_user')
+            ->join('detail_produk','detail_produk.id_produk = pesanan.id_produk');
+        $this->db->where($where);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function showtransactionfor($koperasi, $status) {
+        $where = array(
+            'detail_produk.koperasi' => $koperasi,
+            'pesanan.status_invoice' => $status
+        );
+        $this->db->select('*')->from('pesanan')
+            ->join('user','user.id_user = pesanan.id_user')
+            ->join('detail_produk','detail_produk.id_produk = pesanan.id_produk');
+        $this->db->where($where);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }

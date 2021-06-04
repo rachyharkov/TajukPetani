@@ -297,6 +297,46 @@ class Koperasi extends CI_Controller {
 
 	}
 
+	public function transaksi()
+	{
+		$iduser = $this->session->userdata('iduser'); //ambil data berdasarkan sessionuserdata
+		$where = array(
+			"id_user" => $iduser
+		);
+		$data['qinfo'] = $this->tajukpetanimodel->tampilinformasiakun('user',$where);
+
+		$data['all'] = $this->koperasi_model->showalltransaction($iduser);
+		$data['belumdibayars'] = $this->koperasi_model->showtransactionfor($iduser,'BELUM DIBAYAR');
+		$data['menunggudiambils'] = $this->koperasi_model->showtransactionfor($iduser, 'MENUNGGU DIAMBIL');
+		$data['dalamperjalanans'] = $this->koperasi_model->showtransactionfor($iduser, 'DALAM PERJALANAN');
+		$data['selesais'] = $this->koperasi_model->showtransactionfor($iduser, 'SELESAI');
+
+		$data['hitungall'] = $this->koperasi_model->countalltransaction($iduser);
+		$data['hitungbelumdibayar'] = $this->koperasi_model->counttransaction($iduser, 'BELUM DIBAYAR');
+		$data['hitungmenunggudiambil'] = $this->koperasi_model->counttransaction($iduser, 'MENUNGGU DIAMBIL');
+		$data['hitungdalamperjalanan'] = $this->koperasi_model->counttransaction($iduser, 'DALAM PERJALANAN');
+		$data['hitungselesai'] = $this->koperasi_model->counttransaction($iduser, 'SELESAI');
+
+		$data['title'] = 'Daftar Transaksi - Tajuk Petani Web App';
+
+		$this->load->view('koperasi/header', $data);
+		$this->load->view('koperasi/transaksi_list', $data);
+	}
+
+	public function update_status_invoice($idinvoice, $status) {
+		
+		$sts = str_replace('%20',' ', $status);
+
+		$data = array(
+			'status_invoice' => $sts
+		);
+		$where = array(
+			'id_invoice' => $idinvoice
+		);
+		$this->tajukpetanimodel->lakukan_update($where,$data,'pesanan');
+		$this->transaksi();
+	}
+
 	public function koperasi_menu()
 	{
 		$this->load->view('koperasi/koperasi');
