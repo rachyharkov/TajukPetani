@@ -201,7 +201,7 @@
             <div style="overflow-x: scroll;overflow-y: hidden;">
                 <div class="card-slider">
                     <?php
-                        for ($i=0; $i < 5 ; $i++) { 
+                        foreach($cocoktanams as $ct) { 
                             ?>
 
                             <div class="card">
@@ -215,16 +215,16 @@
                                         justify-content: space-between;
                                         height: 100%;">
                                         <div>
-                                            Kangkung
+                                            <?php echo $ct->musim_tanaman ?>
                                         </div>
                                         <p style="font-style: normal;
                                             font-weight: bold;
                                             font-size: 20px;
                                             line-height: 27px;
-                                            margin: 0;">Januari</p>
+                                            margin: 0;"><?php echo bulan($ct->bulan); ?></p>
                                     </div>
                                 </div>
-                                <img src="<?php echo base_url() ?>img/mc-kangkung.png" style="position: absolute;
+                                <img src="<?php echo base_url().'img/'.$ct->gambar ?>" style="position: absolute;
                                     width: 100%;
                                     top: -24px;
                                     right: -19px;
@@ -240,12 +240,111 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container"x>
             <h4 style="font-weight: bold;">Harga Pangan</h4>
             <p style="margin: 0; font-size: 10px;">Terakhir update : 1 Juni 2021 <span class="badge bg-warning text-dark">Memasuki Musim Hujan</span></p>
         </div>
+        
         <div style="width: 100%; margin-top: 2vh;">
-            <img src="<?php echo base_url() ?>img/map.svg" style="width: 100%;">
+            <div class="selectdiv" style="margin: 0 24px;">
+              <label style="width: 100%;">
+                  <select id="comboboxpiliharea">
+                      <option selected>Pilih Area</option>
+                      <option value="Bekasi">Bekasi</option>
+                      <option value="Lampung">Lampung</option>
+                      <option value="Banten">Banten</option>
+                      <option value="Yogyakarta">Yogyakarta</option>
+                      <option value="Bandung">Bandung</option>
+                      <option value="Jakarta">Jakarta</option>
+                  </select>
+              </label>
+            </div>
+            <div style="width: 100%;">
+                <div style="overflow-x: scroll;overflow-y: hidden;">
+                    <div style="padding: 16px 1em;
+                        width: 100%;
+                        display: grid;
+                        grid-template-rows: 1fr 1fr;
+                        grid-auto-flow: column;
+                        grid-gap: 26px 14px;">
+
+                        <?php 
+
+                        foreach($hargapangans as $hp) {
+
+                            $rentang = '';
+                            $icon = '';
+                            $background = '';
+                            $hsekarang = $hp->harga_sekarang;
+                            $hlalu = $hp->harga_lalu;
+                            $output = '';
+
+                            if ($hsekarang > $hlalu) {
+                                $icon = 'fas fa-arrow-up fa-fw';
+                                $background = '#c0392b';
+                                $rentang = $hsekarang - $hlalu;
+                                $diff = ($hsekarang - $hlalu) / $hlalu;
+                                $output = round($diff * 100, 2).'% - Rp.'.$rentang;
+                            }
+                            if ($hsekarang < $hlalu) {
+                                $icon = 'fas fa-arrow-down fa-fw';
+                                $background = '#27ae60';
+                                $rentang = $hlalu - $hsekarang;
+                                $diff = ($hsekarang - $hlalu) / $hlalu;
+                                $output = round($diff * 100, 2).'% - Rp.'.$rentang;
+                            } 
+
+                            if ($hsekarang === $hlalu) {
+                                $icon = 'fa fa-pause fa-fw';
+                                $background = '#2980b9';
+                                $rentang = 0;
+                                $output = 'Harga Tetap';
+                            }
+
+                            ?>
+
+                        <div style="width: 144px;
+                            padding: 27px 1px 12px 1px;
+                            position: relative;
+                            box-shadow: rgb(99 99 99 / 27%) 0px 2px 8px 0px;
+                            border-radius: 10px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;">
+                            <div style="    background: <?php echo $background; ?>;
+                                font-size: 10px;
+                                color: #f8f9fa;
+                                text-align: center;
+                                line-height: 15px;
+                                padding: 9px;
+                                position: absolute;
+                                box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+                                top: -11px;
+                                border-radius: 14px;
+                                left: 8px;">
+                                <p style="margin: 0;
+                                position: relative;
+                                padding-left: 20px;"><span style="
+                                position: absolute;
+                                left: -6px;
+                                top: -4px;
+                                font-size: 20px;
+                                "><i class="<?php echo $icon ?>"></i></span><?php echo $output ?></p> 
+                            </div>
+                            <p style="margin: 0 1em;
+                                font-size: 17px;
+                                font-weight: 700;">Rp.<?php echo $hsekarang.'/'.$hp->satuan; ?></p>
+                            <p style="font-size: 13px;
+                                margin: 0 1.2em;"><?php echo $hp->nama_pangan; ?></p>
+                        </div>
+
+                        <?php
+                        }
+                        ?>
+
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="container" style="margin-top: 30px;">

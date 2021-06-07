@@ -47,6 +47,8 @@ class Koperasi extends CI_Controller {
 		$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
 		$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
 		$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
+		$data['hargapangans'] = $this->tajukpetanimodel->showallhargapanganinfo();
+		$data['cocoktanams'] = $this->tajukpetanimodel->showallcocoktanaminfo();
 		$data['title'] = 'Beranda - Tajuk Petani Web App';
 		$this->load->view('koperasi/header',$data);
 		$this->load->view('koperasi/index');
@@ -62,6 +64,8 @@ class Koperasi extends CI_Controller {
 		$where = array(
 			"id_user" => $iduser
 		);
+		$data['hargapangans'] = $this->tajukpetanimodel->showallhargapanganinfo();
+		$data['cocoktanams'] = $this->tajukpetanimodel->showallcocoktanaminfo();
 		$data['qinfo'] = $this->tajukpetanimodel->tampilinformasiakun('user',$where);
 		$data['title'] = 'Beranda - Tajuk Petani Web App';
 		$this->load->view('koperasi/index',$data);

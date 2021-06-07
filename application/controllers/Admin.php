@@ -30,7 +30,7 @@ class Admin extends CI_Controller {
         $this->load->model('visitor_model');
         $this->load->model('tajukpetanimodel');
         $this->load->library('form_validation');        
-		$this->load->helper(array('form', 'url','text'));
+		$this->load->helper(array('form', 'url','text','date_local'));
 		header("Access-Control-Allow-Origin: *");
 		header("Access-Control-Allow-Methods: GET, OPTIONS, POST, GET, PUT");
 		header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
@@ -43,6 +43,8 @@ class Admin extends CI_Controller {
 			"id_user" => $iduser
 		);
 		$data['qinfo'] = $this->tajukpetanimodel->tampilinformasiakun('user',$where);
+		$data['hargapangans'] = $this->tajukpetanimodel->showallhargapanganinfo();
+		$data['cocoktanams'] = $this->tajukpetanimodel->showallcocoktanaminfo();
 		$data['title'] = 'Admin - Dashboard Information Management System';
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/index');
@@ -56,6 +58,8 @@ class Admin extends CI_Controller {
 			"id_user" => $iduser
 		);
 		$data['qinfo'] = $this->tajukpetanimodel->tampilinformasiakun('user',$where);
+		$data['hargapangans'] = $this->tajukpetanimodel->showallhargapanganinfo();
+		$data['cocoktanams'] = $this->tajukpetanimodel->showallcocoktanaminfo();
 		$data['title'] = 'Admin - Dashboard Information Management System';
 		$this->load->view('admin/index',$data);
 	}

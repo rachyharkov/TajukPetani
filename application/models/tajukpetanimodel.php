@@ -132,6 +132,18 @@ class tajukpetanimodel extends CI_Model
         return $query->result();
     }
 
+    function showallhargapanganinfo() {
+        $this->db->select('*')->from('harga_pangan');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function showallcocoktanaminfo() {
+        $this->db->select('*')->from('musim_cocok_tanam');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 	/*function tampil_peserta()
     {
         return $this->db->get('tbl_peserta');

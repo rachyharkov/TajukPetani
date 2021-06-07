@@ -43,6 +43,8 @@ class Home extends CI_Controller {
 			$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
 			$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
 			$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
+			$data['hargapangans'] = $this->tajukpetanimodel->showallhargapanganinfo();
+			$data['cocoktanams'] = $this->tajukpetanimodel->showallcocoktanaminfo();
 			$data['title'] = 'Beranda - Tajuk Petani Web App';
 			$this->load->view('koperasi/header',$data);
 			$this->load->view('koperasi/index');
@@ -57,6 +59,8 @@ class Home extends CI_Controller {
 			$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
 			$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
 			$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
+			$data['hargapangans'] = $this->tajukpetanimodel->showallhargapanganinfo();
+			$data['cocoktanams'] = $this->tajukpetanimodel->showallcocoktanaminfo();
 			$data['title'] = 'Beranda - Tajuk Petani Web App';
 			$this->load->view('petani/header',$data);
 			$this->load->view('petani/index');
@@ -65,6 +69,8 @@ class Home extends CI_Controller {
 			$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
 			$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
 			$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
+			$data['hargapangans'] = $this->tajukpetanimodel->showallhargapanganinfo();
+			$data['cocoktanams'] = $this->tajukpetanimodel->showallcocoktanaminfo();
 			$data['title'] = 'Beranda - Tajuk Petani Web App';
 			$this->load->view('visitor/header',$data);
 			$this->load->view('visitor/index');
@@ -85,6 +91,8 @@ class Home extends CI_Controller {
 			$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
 			$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
 			$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
+			$data['hargapangans'] = $this->tajukpetanimodel->showallhargapanganinfo();
+			$data['cocoktanams'] = $this->tajukpetanimodel->showallcocoktanaminfo();
 			$data['title'] = 'Beranda - Tajuk Petani Web App';
 			$this->load->view('koperasi/index',$data);
 		} else if ($this->session->userdata('role') == 'petani') {
@@ -97,12 +105,16 @@ class Home extends CI_Controller {
 			$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
 			$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
 			$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
+			$data['hargapangans'] = $this->tajukpetanimodel->showallhargapanganinfo();
+			$data['cocoktanams'] = $this->tajukpetanimodel->showallcocoktanaminfo();
 			$data['title'] = 'Beranda - Tajuk Petani Web App';
 			$this->load->view('petani/index',$data);
 		} else {
 			$data['listfiveproductspupuk'] = $this->visitor_model->get_five_products('1');
 			$data['listfiveproductspestisida'] = $this->visitor_model->get_five_products('2');
 			$data['listfiveproductsbibit'] = $this->visitor_model->get_five_products('3');
+			$data['hargapangans'] = $this->tajukpetanimodel->showallhargapanganinfo();
+			$data['cocoktanams'] = $this->tajukpetanimodel->showallcocoktanaminfo();
 			$data['title'] = 'Beranda - Tajuk Petani Web App';
 			$this->load->view('visitor/index',$data);
 		}
