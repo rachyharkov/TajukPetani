@@ -68,9 +68,9 @@ class Visitor_model extends CI_Model
     }
 
     // insert data
-    function insert($data)
+    function insert($tabelnya, $datanya)
     {
-        $this->db->insert($this->table, $data);
+        $this->db->insert($tabelnya, $datanya);
     }
 
     // update data

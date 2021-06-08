@@ -39,7 +39,7 @@
                         <button class="btn btn-light active" id="pills-SemuaTransaksi-tab" data-bs-toggle="pill" data-bs-target="#pills-alltransaksi" type="button" role="tab" aria-controls="pills-alltransaksi" aria-selected="true"><span style="margin: 0 3px;">Semua (<?php echo $hitungall ?>)</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="btn btn-light" id="pills-AktifTransaksi-tab" data-bs-toggle="pill" data-bs-target="#pills-aktiftransaksi" type="button" role="tab" aria-controls="pills-aktiftransaksi" aria-selected="true"><span style="margin: 0 3px;">Belum Dibayar (<?php echo $hitungbelumdibayar ?>)</button>
+                        <button class="btn btn-light" id="pills-belumDibayar-tab" data-bs-toggle="pill" data-bs-target="#pills-belumDibayar" type="button" role="tab" aria-controls="pills-belumDibayar" aria-selected="true"><span style="margin: 0 3px;">Belum Dibayar (<?php echo $hitungbelumdibayar ?>)</button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="btn btn-light" id="pills-DalamPerjalananTransaksi-tab" data-bs-toggle="pill" data-bs-target="#pills-dalamperjalanantransaksi" type="button" role="tab" aria-controls="pills-dalamperjalanantransaksi" aria-selected="true"><span style="margin: 0 3px;">Dalam Perjalanan (<?php echo $hitungdalamperjalanan ?>)</button>
@@ -109,7 +109,7 @@
                                 }
 
 
-                                if($v->status_invoice == 'DALAM PERJALANAN' || $v->status_invoice == 'BELUM DIBAYAR') {
+                                if($v->status_invoice == 'DALAM PERJALANAN' || $v->status_invoice == 'BELUM DIBAYAR' || $v->status_invoice == 'BELUM DIBAYAR' ) {
                                     echo 'bg-warning';
                                 }
 
@@ -118,7 +118,7 @@
                                 }
                         ?>"><?php echo $v->status_invoice ?></span></p>
 	                    </div>
-	                    <div style="width: 100%;grid-column-start: 1;grid-column-end: 3;padding: 10px 0; display: grid; grid-template-columns: 1fr <?php echo $v->status_invoice != 'DIBATALKAN' ? '1fr 0.2fr' : '0.1fr' ?>">
+	                    <div style="width: 100%;grid-column-start: 1;grid-column-end: 3;padding: 10px 0; display: grid; grid-template-columns: 1fr <?php echo $v->status_invoice == 'BELUM DIBAYAR' ? '1fr 0.2fr' : '0.1fr' ?>">
 	                      <a href="<?php echo base_url().'Petani/view_invoice/'.$this->session->userdata('iduser').'/'.$v->id_invoice ?>" style="color: gray;
 	                        text-align: center;
 	                        border: 1px solid gray;
@@ -128,7 +128,7 @@
 	                        font-weight: 700;
 	                        display: block;margin-right: 5px;">Detail</a>
                         <?php
-                        if($v->status_invoice != 'DIBATALKAN') {
+                        if($v->status_invoice === 'BELUM DIBAYAR') {
                             ?> 
                                 <a href="#" style="color: gray;
                                     text-align: center;
@@ -136,7 +136,7 @@
                                     padding: 3px 18px;
                                     font-size: 13px;
                                     border-radius: 6px;
-                                    font-weight: 700;margin-left: 5px;">QR Code</a>
+                                    font-weight: 700;margin-left: 5px;">Scan</a>
 
                             <?php
                         }
@@ -151,17 +151,107 @@
 
             </div>
 
-            <div class="tab-pane fade" id="pills-aktiftransaksi" role="tabpanel" aria-labelledby="pills-AktifTransaksi-tab">
+            <div class="tab-pane fade" id="pills-belumDibayar" role="tabpanel" aria-labelledby="pills-belumDibayar-tab">
                 <div style="width: 100%;
     margin-top: 15em;
     padding: 7px 0 0 0;
     overflow: hidden;">
-                	<div style="height: 9.5em;
+                <?php
+                if (!$belumdibayars) {
+                    ?>
+                    <div style="height: 9.5em;
                 text-align: center;">
-	                    <p style="margin-top: 23%;
-	                    transform: translateY(-50%);">Tidak ada transaksi</p>
+                        <p style="margin-top: 23%;
+                        transform: translateY(-50%);">Tidak ada transaksi</p>
 
-	                </div>
+                    </div>
+                    <?php
+                }
+                foreach ($belumdibayars as $v) {
+                    $gambarnya = explode(';', $v->gambar);
+                  ?>
+                    <div class="product-list-wrapper">
+                        <div class="product-option-element" id="option-lists<?php echo $v->id_pesanan ?>">
+                            <div style="height: 100%;
+                                width: 100%;
+                                display: grid;
+                                grid-template-columns: 1fr 1fr 1fr 0.3fr;
+                                position: relative;
+                                grid-template-rows: 7em;">
+                                <div>
+                                    <a class="btnnavproductoption link-to" href="<?php echo base_url() ?>Help">
+                                        <i class="fas fa-edit fa-3x" style="width: 23px;"></i>
+                                        <p style="margin: 8px 0;">Bantuan</p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a class="btnnavproductoption" href="<?php echo base_url() ?>share">
+                                        <i class="fas fa-share-alt fa-3x" style="width: 23px;"></i>
+                                        <p style="margin: 8px 0;">Bagikan</p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <button class="btnnavproductoption" id="btndelete<?php echo $v->id_pesanan ?>">
+                                        <i class="fas fa-trash fa-3x" style="width: 23px;"></i>
+                                        <p style="margin: 8px 0;">Batalkan</p>
+                                    </button>
+                                </div>
+                                <button id="btncloseoptionfor<?php echo $v->id_pesanan ?>" style="color: gray;padding: 3px 5px 0 5px;text-align: center; border: none; background-color: transparent;"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <img src="<?php echo base_url() ?>image-data/koperasi/<?php echo $gambarnya[0] ?>" style="display: block;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;"/>
+                        <div style="display: grid; grid-template-rows: 15px 15px 16px; padding-left: 10px;align-self: center;">
+                          <p style="font-size: 15px;font-weight: 600;"><?php echo $v->nama_produk ?></p>
+                          <p style="font-size: 11px;margin: 5px 0;">Total : <?php echo $v->harga ?></p>
+                          <p style="font-size: 11px;margin: 9px 0;">Batas : <?php echo $v->batas_pengambilan ?></p>
+                          <p style="font-size: 11px;margin: 9px 0;"><span class="badge 
+                            <?php 
+                                if($v->status_invoice == 'DIBATALKAN') {
+                                    echo 'bg-danger';
+                                }
+
+
+                                if($v->status_invoice == 'DALAM PERJALANAN' || $v->status_invoice == 'BELUM DIBAYAR' || $v->status_invoice == 'BELUM DIBAYAR' ) {
+                                    echo 'bg-warning';
+                                }
+
+                                if($v->status_invoice == 'SELESAI') {
+                                    echo 'bg-success';
+                                }
+                        ?>"><?php echo $v->status_invoice ?></span></p>
+                        </div>
+                        <div style="width: 100%;grid-column-start: 1;grid-column-end: 3;padding: 10px 0; display: grid; grid-template-columns: 1fr <?php echo $v->status_invoice == 'BELUM DIBAYAR' ? '1fr 0.2fr' : '0.1fr' ?>">
+                          <a href="<?php echo base_url().'Petani/view_invoice/'.$this->session->userdata('iduser').'/'.$v->id_invoice ?>" style="color: gray;
+                            text-align: center;
+                            border: 1px solid gray;
+                            padding: 3px 18px;
+                            font-size: 13px;
+                            border-radius: 6px;
+                            font-weight: 700;
+                            display: block;margin-right: 5px;">Detail</a>
+                        <?php
+                        if($v->status_invoice === 'BELUM DIBAYAR') {
+                            ?> 
+                                <a href="#" style="color: gray;
+                                    text-align: center;
+                                    border: 1px solid gray;
+                                    padding: 3px 18px;
+                                    font-size: 13px;
+                                    border-radius: 6px;
+                                    font-weight: 700;margin-left: 5px;">Scan</a>
+
+                            <?php
+                        }
+                        ?>
+                        <button id="btninitoptionfor<?php echo $v->id_pesanan ?>" href="#" style="color: gray;padding: 3px 5px 0 5px;text-align: center; border: none; background-color: transparent;"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                      </div>
+                      <?php
+                    }
+                ?>
                 </div>
             </div>
             
@@ -170,26 +260,206 @@
     margin-top: 15em;
     padding: 7px 0 0 0;
     overflow: hidden;">
-                	<div style="height: 9.5em;
+                	<?php
+                if (!$menunggudiambils) {
+                    ?>
+                    <div style="height: 9.5em;
                 text-align: center;">
-	                    <p style="margin-top: 23%;
-	                    transform: translateY(-50%);">Tidak ada transaksi</p>
+                        <p style="margin-top: 23%;
+                        transform: translateY(-50%);">Tidak ada transaksi</p>
 
-	                </div>
+                    </div>
+                    <?php
+                }
+                foreach ($menunggudiambils as $v) {
+                    $gambarnya = explode(';', $v->gambar);
+                  ?>
+                    <div class="product-list-wrapper">
+                        <div class="product-option-element" id="option-lists<?php echo $v->id_pesanan ?>">
+                            <div style="height: 100%;
+                                width: 100%;
+                                display: grid;
+                                grid-template-columns: 1fr 1fr 1fr 0.3fr;
+                                position: relative;
+                                grid-template-rows: 7em;">
+                                <div>
+                                    <a class="btnnavproductoption link-to" href="<?php echo base_url() ?>Help">
+                                        <i class="fas fa-edit fa-3x" style="width: 23px;"></i>
+                                        <p style="margin: 8px 0;">Bantuan</p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a class="btnnavproductoption" href="<?php echo base_url() ?>share">
+                                        <i class="fas fa-share-alt fa-3x" style="width: 23px;"></i>
+                                        <p style="margin: 8px 0;">Bagikan</p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <button class="btnnavproductoption" id="btndelete<?php echo $v->id_pesanan ?>">
+                                        <i class="fas fa-trash fa-3x" style="width: 23px;"></i>
+                                        <p style="margin: 8px 0;">Batalkan</p>
+                                    </button>
+                                </div>
+                                <button id="btncloseoptionfor<?php echo $v->id_pesanan ?>" style="color: gray;padding: 3px 5px 0 5px;text-align: center; border: none; background-color: transparent;"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <img src="<?php echo base_url() ?>image-data/koperasi/<?php echo $gambarnya[0] ?>" style="display: block;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;"/>
+                        <div style="display: grid; grid-template-rows: 15px 15px 16px; padding-left: 10px;align-self: center;">
+                          <p style="font-size: 15px;font-weight: 600;"><?php echo $v->nama_produk ?></p>
+                          <p style="font-size: 11px;margin: 5px 0;">Total : <?php echo $v->harga ?></p>
+                          <p style="font-size: 11px;margin: 9px 0;">Batas : <?php echo $v->batas_pengambilan ?></p>
+                          <p style="font-size: 11px;margin: 9px 0;"><span class="badge 
+                            <?php 
+                                if($v->status_invoice == 'DIBATALKAN') {
+                                    echo 'bg-danger';
+                                }
+
+
+                                if($v->status_invoice == 'DALAM PERJALANAN' || $v->status_invoice == 'BELUM DIBAYAR' || $v->status_invoice == 'BELUM DIBAYAR' ) {
+                                    echo 'bg-warning';
+                                }
+
+                                if($v->status_invoice == 'SELESAI') {
+                                    echo 'bg-success';
+                                }
+                        ?>"><?php echo $v->status_invoice ?></span></p>
+                        </div>
+                        <div style="width: 100%;grid-column-start: 1;grid-column-end: 3;padding: 10px 0; display: grid; grid-template-columns: 1fr <?php echo $v->status_invoice == 'BELUM DIBAYAR' ? '1fr 0.2fr' : '0.1fr' ?>">
+                          <a href="<?php echo base_url().'Petani/view_invoice/'.$this->session->userdata('iduser').'/'.$v->id_invoice ?>" style="color: gray;
+                            text-align: center;
+                            border: 1px solid gray;
+                            padding: 3px 18px;
+                            font-size: 13px;
+                            border-radius: 6px;
+                            font-weight: 700;
+                            display: block;margin-right: 5px;">Detail</a>
+                        <?php
+                        if($v->status_invoice === 'BELUM DIBAYAR') {
+                            ?> 
+                                <a href="#" style="color: gray;
+                                    text-align: center;
+                                    border: 1px solid gray;
+                                    padding: 3px 18px;
+                                    font-size: 13px;
+                                    border-radius: 6px;
+                                    font-weight: 700;margin-left: 5px;">Scan</a>
+
+                            <?php
+                        }
+                        ?>
+                        <button id="btninitoptionfor<?php echo $v->id_pesanan ?>" href="#" style="color: gray;padding: 3px 5px 0 5px;text-align: center; border: none; background-color: transparent;"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                      </div>
+                      <?php
+                    }
+                ?>
                 </div>
             </div>
 
-            <div class="tab-pane fade" id="pills-dalamperjalanantransaksi" role="tabpanel" aria-labelledby="pills-categorysembako-tab">
+            <div class="tab-pane fade" id="pills-dalamperjalanantransaksi" role="tabpanel" aria-labelledby="pills-dalamperjalanantransaksi-tab">
                 <div style="width: 100%;
     margin-top: 15em;
     padding: 7px 0 0 0;
     overflow: hidden;">
-                	<div style="height: 9.5em;
+                	<?php
+                if (!$dalamperjalanans) {
+                    ?>
+                    <div style="height: 9.5em;
                 text-align: center;">
-	                    <p style="margin-top: 23%;
-	                    transform: translateY(-50%);">Tidak ada transaksi</p>
+                        <p style="margin-top: 23%;
+                        transform: translateY(-50%);">Tidak ada transaksi</p>
 
-	                </div>
+                    </div>
+                    <?php
+                }
+                foreach ($dalamperjalanans as $v) {
+                    $gambarnya = explode(';', $v->gambar);
+                  ?>
+                    <div class="product-list-wrapper">
+                        <div class="product-option-element" id="option-lists<?php echo $v->id_pesanan ?>">
+                            <div style="height: 100%;
+                                width: 100%;
+                                display: grid;
+                                grid-template-columns: 1fr 1fr 1fr 0.3fr;
+                                position: relative;
+                                grid-template-rows: 7em;">
+                                <div>
+                                    <a class="btnnavproductoption link-to" href="<?php echo base_url() ?>Help">
+                                        <i class="fas fa-edit fa-3x" style="width: 23px;"></i>
+                                        <p style="margin: 8px 0;">Bantuan</p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a class="btnnavproductoption" href="<?php echo base_url() ?>share">
+                                        <i class="fas fa-share-alt fa-3x" style="width: 23px;"></i>
+                                        <p style="margin: 8px 0;">Bagikan</p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <button class="btnnavproductoption" id="btndelete<?php echo $v->id_pesanan ?>">
+                                        <i class="fas fa-trash fa-3x" style="width: 23px;"></i>
+                                        <p style="margin: 8px 0;">Batalkan</p>
+                                    </button>
+                                </div>
+                                <button id="btncloseoptionfor<?php echo $v->id_pesanan ?>" style="color: gray;padding: 3px 5px 0 5px;text-align: center; border: none; background-color: transparent;"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <img src="<?php echo base_url() ?>image-data/koperasi/<?php echo $gambarnya[0] ?>" style="display: block;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;"/>
+                        <div style="display: grid; grid-template-rows: 15px 15px 16px; padding-left: 10px;align-self: center;">
+                          <p style="font-size: 15px;font-weight: 600;"><?php echo $v->nama_produk ?></p>
+                          <p style="font-size: 11px;margin: 5px 0;">Total : <?php echo $v->harga ?></p>
+                          <p style="font-size: 11px;margin: 9px 0;">Batas : <?php echo $v->batas_pengambilan ?></p>
+                          <p style="font-size: 11px;margin: 9px 0;"><span class="badge 
+                            <?php 
+                                if($v->status_invoice == 'DIBATALKAN') {
+                                    echo 'bg-danger';
+                                }
+
+
+                                if($v->status_invoice == 'DALAM PERJALANAN' || $v->status_invoice == 'BELUM DIBAYAR' || $v->status_invoice == 'BELUM DIBAYAR' ) {
+                                    echo 'bg-warning';
+                                }
+
+                                if($v->status_invoice == 'SELESAI') {
+                                    echo 'bg-success';
+                                }
+                        ?>"><?php echo $v->status_invoice ?></span></p>
+                        </div>
+                        <div style="width: 100%;grid-column-start: 1;grid-column-end: 3;padding: 10px 0; display: grid; grid-template-columns: 1fr <?php echo $v->status_invoice == 'BELUM DIBAYAR' ? '1fr 0.2fr' : '0.1fr' ?>">
+                          <a href="<?php echo base_url().'Petani/view_invoice/'.$this->session->userdata('iduser').'/'.$v->id_invoice ?>" style="color: gray;
+                            text-align: center;
+                            border: 1px solid gray;
+                            padding: 3px 18px;
+                            font-size: 13px;
+                            border-radius: 6px;
+                            font-weight: 700;
+                            display: block;margin-right: 5px;">Detail</a>
+                        <?php
+                        if($v->status_invoice === 'BELUM DIBAYAR') {
+                            ?> 
+                                <a href="#" style="color: gray;
+                                    text-align: center;
+                                    border: 1px solid gray;
+                                    padding: 3px 18px;
+                                    font-size: 13px;
+                                    border-radius: 6px;
+                                    font-weight: 700;margin-left: 5px;">Scan</a>
+
+                            <?php
+                        }
+                        ?>
+                        <button id="btninitoptionfor<?php echo $v->id_pesanan ?>" href="#" style="color: gray;padding: 3px 5px 0 5px;text-align: center; border: none; background-color: transparent;"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                      </div>
+                      <?php
+                    }
+                ?>
                 </div>
             </div>
 
@@ -198,12 +468,102 @@
     margin-top: 15em;
     padding: 7px 0 0 0;
     overflow: hidden;">
-                	<div style="height: 9.5em;
+                	<?php
+                if (!$selesais) {
+                    ?>
+                    <div style="height: 9.5em;
                 text-align: center;">
-	                    <p style="margin-top: 23%;
-	                    transform: translateY(-50%);">Tidak ada transaksi</p>
+                        <p style="margin-top: 23%;
+                        transform: translateY(-50%);">Tidak ada transaksi</p>
 
-	                </div>
+                    </div>
+                    <?php
+                }
+                foreach ($selesais as $v) {
+                    $gambarnya = explode(';', $v->gambar);
+                  ?>
+                    <div class="product-list-wrapper">
+                        <div class="product-option-element" id="option-lists<?php echo $v->id_pesanan ?>">
+                            <div style="height: 100%;
+                                width: 100%;
+                                display: grid;
+                                grid-template-columns: 1fr 1fr 1fr 0.3fr;
+                                position: relative;
+                                grid-template-rows: 7em;">
+                                <div>
+                                    <a class="btnnavproductoption link-to" href="<?php echo base_url() ?>Help">
+                                        <i class="fas fa-edit fa-3x" style="width: 23px;"></i>
+                                        <p style="margin: 8px 0;">Bantuan</p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a class="btnnavproductoption" href="<?php echo base_url() ?>share">
+                                        <i class="fas fa-share-alt fa-3x" style="width: 23px;"></i>
+                                        <p style="margin: 8px 0;">Bagikan</p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <button class="btnnavproductoption" id="btndelete<?php echo $v->id_pesanan ?>">
+                                        <i class="fas fa-trash fa-3x" style="width: 23px;"></i>
+                                        <p style="margin: 8px 0;">Batalkan</p>
+                                    </button>
+                                </div>
+                                <button id="btncloseoptionfor<?php echo $v->id_pesanan ?>" style="color: gray;padding: 3px 5px 0 5px;text-align: center; border: none; background-color: transparent;"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <img src="<?php echo base_url() ?>image-data/koperasi/<?php echo $gambarnya[0] ?>" style="display: block;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;"/>
+                        <div style="display: grid; grid-template-rows: 15px 15px 16px; padding-left: 10px;align-self: center;">
+                          <p style="font-size: 15px;font-weight: 600;"><?php echo $v->nama_produk ?></p>
+                          <p style="font-size: 11px;margin: 5px 0;">Total : <?php echo $v->harga ?></p>
+                          <p style="font-size: 11px;margin: 9px 0;">Batas : <?php echo $v->batas_pengambilan ?></p>
+                          <p style="font-size: 11px;margin: 9px 0;"><span class="badge 
+                            <?php 
+                                if($v->status_invoice == 'DIBATALKAN') {
+                                    echo 'bg-danger';
+                                }
+
+
+                                if($v->status_invoice == 'DALAM PERJALANAN' || $v->status_invoice == 'BELUM DIBAYAR' || $v->status_invoice == 'BELUM DIBAYAR' ) {
+                                    echo 'bg-warning';
+                                }
+
+                                if($v->status_invoice == 'SELESAI') {
+                                    echo 'bg-success';
+                                }
+                        ?>"><?php echo $v->status_invoice ?></span></p>
+                        </div>
+                        <div style="width: 100%;grid-column-start: 1;grid-column-end: 3;padding: 10px 0; display: grid; grid-template-columns: 1fr <?php echo $v->status_invoice == 'BELUM DIBAYAR' ? '1fr 0.2fr' : '0.1fr' ?>">
+                          <a href="<?php echo base_url().'Petani/view_invoice/'.$this->session->userdata('iduser').'/'.$v->id_invoice ?>" style="color: gray;
+                            text-align: center;
+                            border: 1px solid gray;
+                            padding: 3px 18px;
+                            font-size: 13px;
+                            border-radius: 6px;
+                            font-weight: 700;
+                            display: block;margin-right: 5px;">Detail</a>
+                        <?php
+                        if($v->status_invoice === 'BELUM DIBAYAR') {
+                            ?> 
+                                <a href="#" style="color: gray;
+                                    text-align: center;
+                                    border: 1px solid gray;
+                                    padding: 3px 18px;
+                                    font-size: 13px;
+                                    border-radius: 6px;
+                                    font-weight: 700;margin-left: 5px;">Scan</a>
+
+                            <?php
+                        }
+                        ?>
+                        <button id="btninitoptionfor<?php echo $v->id_pesanan ?>" href="#" style="color: gray;padding: 3px 5px 0 5px;text-align: center; border: none; background-color: transparent;"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                      </div>
+                      <?php
+                    }
+                ?>
                 </div>
             </div>
         </div>

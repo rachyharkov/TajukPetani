@@ -67,86 +67,8 @@
         <div class="container" style="color: white;
         flex: 1 0 50%;
         min-height: 77vh;padding: 0 3vh;">
-            <h1 style="margin: 1em 0;">Registrasi Akun</h1>
-            <form class="row g-2" action="<?php echo base_url() ?>register/process" role="form" method="post" enctype="multipart/form-data" autocomplete="off">
-                <div class="col-12">
-                    <label for="tbnoktp" class="form-label">Nomor KTP</label>
-                    <input type="number" class="form-control" id="tbnoktp" name="tbnoktp" aria-describedby="noktpHelp" style="border: none;
-                    border-radius: 65px;">
-                    
-                </div>
-
-                <div class="col-12">
-                    <label for="tbnamalengkap" class="form-label">Nama Lengkap</label>
-                    <input type="text" class="form-control" id="tbnamalengkap" name="tbnamalengkap" aria-describedby="namalengkapHelp" style="border: none;
-                    border-radius: 65px;">
-                   
-                </div>
-
-                <div class="col-12">
-                    <label for="tbnotelp" class="form-label">Nomor Telepon Aktif</label>
-                    <input type="number" class="form-control" id="tbnotelp" name="tbnotelp" aria-describedby="notelpHelp" style="border: none;
-                    border-radius: 65px;">
-                    
-                </div>
-
-                <div class="col-12">
-                    <label for="tbalamat" class="form-label">Alamat</label>
-                    <input type="text" class="form-control" id="tbalamat" name="tbalamat" aria-describedby="alamatHelp" style="border: none;
-                    border-radius: 65px;">
-                   
-                </div>
-
-                <div class="col-5">
-                    <label for="tbrtrw" class="form-label">RT/RW</label>
-                    <input type="text" class="form-control" id="tbrtrw" name="tbrtrw" aria-describedby="rtrwHelp" style="border: none;
-                    border-radius: 65px;">
-                   
-                </div>
-
-                <div class="col-7">
-                    <label for="tbkecamatan" class="form-label">Kecamatan</label>
-                    <input type="text" class="form-control" id="tbkecamatan" name="tbkecamatan" aria-describedby="kecamatanHelp" style="border: none;
-                    border-radius: 65px;">
-                   
-                </div>
-
-                <div class="col-5">
-                    <label for="tbkota" class="form-label">Kota</label>
-                    <input type="text" class="form-control" id="tbkota" name="tbkota" aria-describedby="kotaHelp" style="border: none;
-                    border-radius: 65px;">
-                   
-                </div>
-
-                <div class="col-7">
-                    <label for="tbkelurahan" class="form-label">kelurahan</label>
-                    <input type="text" class="form-control" id="tbkelurahan" name="tbkelurahan" aria-describedby="kelurahanHelp" style="border: none;
-                    border-radius: 65px;">
-                   
-                </div>
-
-                <input type="hidden" name="tbotppassworddummy" value="<?php
-
-
-                    $characters = '0123456789';
-                    $charactersLength = strlen($characters);
-                    $randomString = '';
-                    for ($i = 0; $i < 6; $i++) {
-                        $randomString .= $characters[rand(0, $charactersLength - 1)];
-                    }
-                    echo $randomString;
-                
-            ?>">
-
-                <button type="submit" class="btn btn-success" style="width: 100%;
-                background: #89BF43;
-                font-weight: 700;
-                border: none;">Daftar</button>
-                <p class="bpatext">Sudah punya Akun?</p>
-                <a href="<?php echo base_url() ?>login" class="btn btn-light" style="width: 100%;
-                font-weight: 700;
-                border: none;">Login</a href="<?php echo base_url() ?>login">
-            </form>
+            <h1 style="margin: 1em 0;">Registrasi Berhasil, silahkan menunggu instruksi selanjutnya melalui SMS...</h1>
+            
         </div>
         <div class="footer-login" style="text-align: center;">
             <p style="margin: 11px auto;">Butuh bantuan? <a href="#" style="font-weight: bold; color: #89BF43;">Hubungi Tajuk Petani CS</a></p>
